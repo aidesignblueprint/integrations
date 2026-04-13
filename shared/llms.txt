@@ -1,0 +1,33 @@
+# Agentic Design Blueprint
+
+Generated at: 2026-04-13T13:21:09+01:00
+Source commit: 3c8f0010a0cb4bf3bbc5304e77a0aceed9bdc227
+Content version: 3c8f0010a0cb
+
+Primary entrypoints:
+- https://aidesignblueprint.com/en/for-agents
+- https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.json
+- https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.md
+- https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc
+- https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip
+- https://aidesignblueprint.com/agent-assets/agent-kickoff-prompts.md
+- https://aidesignblueprint.com/agent-assets/AGENTS.md
+- https://aidesignblueprint.com/agent-assets/blueprint-core.md
+- https://aidesignblueprint.com/agent-assets/copilot-instructions.md
+- https://aidesignblueprint.com/agent-assets/GEMINI.md
+- https://aidesignblueprint.com/agent-assets/system-prompt-deepseek.md
+- https://aidesignblueprint.com/agent-assets/system-prompt-qwen.md
+- https://aidesignblueprint.com/agent-assets/claude-code.mcp.json
+- https://aidesignblueprint.com/agent-assets/provider-matrix.md
+
+Setup docs:
+- https://aidesignblueprint.com/agent-assets/setup-claude-code.md
+- https://aidesignblueprint.com/agent-assets/setup-cursor.md
+- https://aidesignblueprint.com/agent-assets/setup-windsurf.md
+- https://aidesignblueprint.com/agent-assets/setup-github-copilot.md
+- https://aidesignblueprint.com/agent-assets/setup-gemini-cli.md
+- https://aidesignblueprint.com/agent-assets/setup-local-models.md
+- https://aidesignblueprint.com/agent-assets/setup-openai-actions.md
+
+MCP:
+- https://aidesignblueprint.com/mcp

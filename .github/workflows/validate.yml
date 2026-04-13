@@ -1,0 +1,39 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f shared/AGENTS.md
+          test -f shared/llms.txt
+          test -f shared/blueprint-core.md
+          test -f mcp/claude-code.mcp.json
+          test -f docs/provider-matrix.md
+          test -f exports/blueprint.json
+
+      - name: Validate JSON
+        run: |
+          python -m json.tool mcp/claude-code.mcp.json >/dev/null
+          python -m json.tool exports/blueprint.json >/dev/null
+
+      - name: Block non-canonical hosts
+        run: |
+          ! rg -n "localhost|127\.0\.0\.1|0\.0\.0\.0|\.run\.app" \
+            README.md \
+            docs/api-contract.md \
+            docs/publishing-rules.md \
+            docs/provider-matrix.md \
+            docs/setup \
+            mcp \
+            shared/AGENTS.md \
+            shared/llms.txt

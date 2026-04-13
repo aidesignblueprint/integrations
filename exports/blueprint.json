@@ -1,0 +1,3043 @@
+{
+  "generated_at": "2026-04-13T13:21:09+01:00",
+  "source_commit": "3c8f0010a0cb4bf3bbc5304e77a0aceed9bdc227",
+  "content_version": "3c8f0010a0cb",
+  "title": "AI Design Principle Blueprint",
+  "purpose": "This document defines the core design principles for AI-enabled products and services in which the system does more than respond to user inputs. It interprets intent, performs actions, coordinates processes, and completes work on the user’s behalf.\n\nConventional digital experiences were designed around direct interaction. In that model, the user remains the primary operator throughout the journey, progressing step by step through a sequence of actions.\n\nAI systems, particularly agentic systems, introduce a materially different model. In these environments, the user is no longer solely the operator of the interface. Instead, the user increasingly assumes the role of supervisor, director, or decision-maker, while the system undertakes execution.\n\nThis blueprint establishes the design principles required to support that transition responsibly and coherently.",
+  "strategic_premise": "Traditional interaction design rests on several assumptions:\n\n* the user is continuously present\n* the user performs each material step directly\n* the user requires visibility of each stage of the process\n* the interface is the principal site of value creation\n\nThese assumptions weaken when AI systems are capable of acting independently, operating asynchronously, and coordinating work across tools, data sources, or multiple agents.\n\nIn an agentic context, the product experience is no longer defined solely by the visible interface. It is defined by the relationship between:\n\n* user intent\n* delegated authority\n* system execution\n* visibility and accountability\n* human intervention when required\n* review and acceptance of outcomes\n\nThe central design question therefore changes.\n\nIt is no longer only: **How does the user complete the task?**\n\nIt becomes: **How does the user delegate the task safely, remain appropriately informed, and intervene only when necessary?**",
+  "design_philosophy": "The objective of AI design is not to create an impression of magic.\n\nThe objective is to make autonomy:\n\n* understandable\n* trustworthy\n* governable\n* interruptible\n* reviewable\n\nThe ambition should not be invisible intelligence. It should be **legible autonomy**.\n\nSystems that act on behalf of users must be designed in a manner that preserves clarity, supports confidence, and maintains an appropriate balance between automation and human oversight.",
+  "principles": [
+    {
+      "id": 1,
+      "slug": "design-for-delegation-rather-than-direct-manipulation",
+      "title": "Design for delegation rather than direct manipulation",
+      "cluster": "delegation",
+      "definition": "Design experiences around the assignment of work, the expression of intent, the setting of constraints, and the review of results, rather than requiring users to execute each step manually.",
+      "rationale": "In agentic systems, value is created when users can define the desired outcome and rely on the system to carry out appropriate actions within agreed limits. The interface should therefore support delegation as a first-class interaction model.",
+      "implications": [
+        "Enable users to define goals, constraints, and preferences with precision.",
+        "Make the scope of delegated authority explicit.",
+        "Provide clear controls for initiation, pause, redirection, and termination of work.",
+        "Treat prompt input as one mechanism among several, not as the entire experience model."
+      ],
+      "risk": "The product remains structurally manual, with AI functioning only as an overlay rather than as an operational capability."
+    },
+    {
+      "id": 2,
+      "slug": "ensure-that-background-work-remains-perceptible",
+      "title": "Ensure that background work remains perceptible",
+      "cluster": "visibility",
+      "definition": "When the system is operating asynchronously or outside the user’s immediate focus, it should provide persistent and proportionate signals that work is continuing.",
+      "rationale": "Users lose confidence when delegated activity becomes invisible. Trust in autonomous systems depends in part on the user’s ability to understand that progress is being made, even when they are not actively observing the process.",
+      "implications": [
+        "Provide lightweight but reliable status indicators.",
+        "Use ambient progress signals instead of relying exclusively on blocking states.",
+        "Enable users to leave and return without losing continuity.",
+        "Preserve task state across sessions where relevant."
+      ],
+      "risk": "The user cannot determine whether the task is active, delayed, blocked, or failed."
+    },
+    {
+      "id": 3,
+      "slug": "align-feedback-with-the-user-s-level-of-attention",
+      "title": "Align feedback with the user’s level of attention",
+      "cluster": "visibility",
+      "definition": "The system should calibrate the depth and frequency of feedback according to whether the user is actively engaged, passively monitoring, or temporarily absent.",
+      "rationale": "Not all moments require the same degree of visibility. Some activities require detailed understanding, while others require only reassurance and exception handling. Effective systems distinguish between these modes.",
+      "implications": [
+        "Support both foreground and background modes of engagement.",
+        "Reduce unnecessary operational noise for routine work.",
+        "Increase detail where risk, uncertainty, or required intervention rises.",
+        "Escalate clearly when user attention is materially required."
+      ],
+      "risk": "The system becomes either excessively opaque or unnecessarily burdensome."
+    },
+    {
+      "id": 4,
+      "slug": "apply-progressive-disclosure-to-system-agency",
+      "title": "Apply progressive disclosure to system agency",
+      "cluster": "trust",
+      "definition": "Provide the minimum information necessary by default, while enabling users to inspect additional detail when confidence, understanding, or intervention is required.",
+      "rationale": "Different users, and the same user in different contexts, require different levels of transparency. The default experience should remain clear and efficient, while deeper inspection should remain available when justified.",
+      "implications": [
+        "Prioritise intent, status, and outcome in the primary view.",
+        "Allow expansion into actions taken, supporting evidence, decision logic, or tool usage.",
+        "Present explanation at an appropriate level of abstraction.",
+        "Distinguish clearly between summary information and detailed inspection."
+      ],
+      "risk": "The system is experienced either as an opaque black box or as an over-exposed technical log."
+    },
+    {
+      "id": 5,
+      "slug": "replace-implied-magic-with-clear-mental-models",
+      "title": "Replace implied magic with clear mental models",
+      "cluster": "delegation",
+      "definition": "The product should help users understand what the system can do, what it is currently doing, what it cannot do, and what conditions govern its behaviour.",
+      "rationale": "Trust is strengthened when users can form accurate expectations. Systems that appear intelligent but remain poorly bounded create confusion, misuse, and misplaced reliance.",
+      "implications": [
+        "Describe capabilities in plain and specific terms.",
+        "Distinguish between suggestion, execution, and automation.",
+        "Make permissions, dependencies, and limitations explicit.",
+        "Indicate when action requires approval and when it proceeds independently."
+      ],
+      "risk": "Users attribute a level of agency, reliability, or competence that the system does not in fact possess."
+    },
+    {
+      "id": 6,
+      "slug": "expose-meaningful-operational-state-not-internal-complexity",
+      "title": "Expose meaningful operational state, not internal complexity",
+      "cluster": "visibility",
+      "definition": "Present the state of the system in language and structures that are relevant to the user, rather than exposing low-level internals that do not support action or understanding.",
+      "rationale": "Users need to understand operational truth, but not necessarily implementation detail. Good design translates machine activity into meaningful human-facing status.",
+      "implications": [
+        "Use states such as active, queued, blocked, awaiting approval, complete, or failed.",
+        "Communicate dependencies when they affect progress or outcome.",
+        "Describe activity in user-relevant terms.",
+        "Reserve deeper technical detail for specialist or diagnostic views where appropriate."
+      ],
+      "risk": "The system either obscures important status or overwhelms the user with irrelevant mechanics."
+    },
+    {
+      "id": 7,
+      "slug": "establish-trust-through-inspectability",
+      "title": "Establish trust through inspectability",
+      "cluster": "trust",
+      "definition": "Users should be able to examine how a result was produced when confidence, accountability, or decision quality is important.",
+      "rationale": "Trust is not established through assertion alone. It is established by enabling proportionate verification. Particularly in high-impact contexts, users must be able to inspect evidence, actions, and changes.",
+      "implications": [
+        "Make source material traceable.",
+        "Provide visibility into actions taken and decisions reached.",
+        "Support comparison between recommendation and result, or between draft and final output.",
+        "Maintain appropriate task history or auditability where needed."
+      ],
+      "risk": "The system demands trust without providing a basis for it."
+    },
+    {
+      "id": 8,
+      "slug": "make-hand-offs-approvals-and-blockers-explicit",
+      "title": "Make hand-offs, approvals, and blockers explicit",
+      "cluster": "trust",
+      "definition": "When the system cannot proceed, the reason should be immediately visible, along with any action required from the user or another dependency.",
+      "rationale": "In agentic systems, failure frequently arises not from incorrect reasoning but from unclear responsibility. Users must know when a task is paused, why it is paused, and what will resume progress.",
+      "implications": [
+        "Surface waiting states clearly.",
+        "Explain whether the dependency is user action, system access, policy constraint, or tool failure.",
+        "Make required actions specific and minimal.",
+        "Distinguish between interruption, failure, and approval gating."
+      ],
+      "risk": "Tasks stall silently, creating confusion and eroding confidence."
+    },
+    {
+      "id": 9,
+      "slug": "represent-delegated-work-as-a-system-not-merely-as-a-conversation",
+      "title": "Represent delegated work as a system, not merely as a conversation",
+      "cluster": "orchestration",
+      "definition": "Where work involves multiple steps, agents, dependencies, or concurrent activities, it should be represented as a structured system rather than solely as a message stream.",
+      "rationale": "A conversational log is not always an appropriate representation for operational complexity. Users need mechanisms to understand relationships, concurrency, and progression across delegated tasks.",
+      "implications": [
+        "Use task views, status layers, timelines, maps, boards, or orchestration frameworks where appropriate.",
+        "Separate conversational exchange from execution state.",
+        "Show dependencies and relationships across subtasks.",
+        "Make concurrent activity understandable at a glance."
+      ],
+      "risk": "Complex work is reduced to an unstructured narrative and becomes difficult to govern."
+    },
+    {
+      "id": 10,
+      "slug": "optimise-for-steering-not-only-initiating",
+      "title": "Optimise for steering, not only initiating",
+      "cluster": "delegation",
+      "definition": "The system should support users not only in starting tasks, but also in guiding, refining, reprioritising, and correcting work while it is underway.",
+      "rationale": "Prompting is an initiation mechanism. It is not, by itself, a sufficient control model for complex or consequential work. Users require the ability to steer ongoing activity without restarting the entire process.",
+      "implications": [
+        "Support intervention mid-process.",
+        "Allow constraints and priorities to be updated dynamically.",
+        "Preserve continuity when the direction of work changes.",
+        "Treat the user as an active governor of execution, not only as an originator of requests."
+      ],
+      "risk": "The only available control becomes repetition or restart, which is inefficient and often operationally unsafe."
+    }
+  ],
+  "clusters": [
+    {
+      "id": "delegation",
+      "slug": "delegation",
+      "description": "Principles that help teams move from direct manipulation toward bounded, steerable delegation.",
+      "principle_ids": [
+        1,
+        5,
+        10
+      ],
+      "titles": [
+        "Design for delegation rather than direct manipulation",
+        "Replace implied magic with clear mental models",
+        "Optimise for steering, not only initiating"
+      ]
+    },
+    {
+      "id": "visibility",
+      "slug": "visibility",
+      "description": "Principles that keep background AI work legible through clear signals, system state, and operator context.",
+      "principle_ids": [
+        2,
+        3,
+        6
+      ],
+      "titles": [
+        "Ensure that background work remains perceptible",
+        "Align feedback with the user’s level of attention",
+        "Expose meaningful operational state, not internal complexity"
+      ]
+    },
+    {
+      "id": "trust",
+      "slug": "trust",
+      "description": "Principles that make system authority, inspectability, and review boundaries explicit.",
+      "principle_ids": [
+        4,
+        7,
+        8
+      ],
+      "titles": [
+        "Apply progressive disclosure to system agency",
+        "Establish trust through inspectability",
+        "Make hand-offs, approvals, and blockers explicit"
+      ]
+    },
+    {
+      "id": "orchestration",
+      "slug": "orchestration",
+      "description": "Principles that model delegated work as systems with visible nodes, handoffs, and review points.",
+      "principle_ids": [
+        9
+      ],
+      "titles": [
+        "Represent delegated work as a system, not merely as a conversation"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "agents-agent-complexity-1-augmented-llm-py",
+      "slug": "agents-agent-complexity-1-augmented-llm",
+      "title": "Level 1: Augmented LLM — Single API Call",
+      "summary": "Level 1: Augmented LLM — Single API Call One model call with structured output, system prompt, and context. No loops, no tools.",
+      "difficulty": "advanced",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        9,
+        10
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-agent-complexity-2-prompt-chains-py",
+      "slug": "agents-agent-complexity-2-prompt-chains",
+      "title": "Level 2: Prompt Chains & Routing — Deterministic DAGs",
+      "summary": "Level 2: Prompt Chains & Routing — Deterministic DAGs Multiple LLM calls in a fixed sequence. Code controls the flow, not the model.",
+      "difficulty": "advanced",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        9,
+        10
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-agent-complexity-3-tool-calling-agent-py",
+      "slug": "agents-agent-complexity-3-tool-calling-agent",
+      "title": "Level 3: Tool-Calling Agent — Scoped Autonomy",
+      "summary": "Level 3: Tool-Calling Agent — Scoped Autonomy The agent decides which tools to call and in what order, but only within a fixed set of well-defined capabilities.",
+      "difficulty": "advanced",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        9,
+        10
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-agent-complexity-4-agent-harness-py",
+      "slug": "agents-agent-complexity-4-agent-harness",
+      "title": "Level 4: Agent Harness — Full Runtime Access",
+      "summary": "Level 4: Agent Harness — Full Runtime Access Give the agent a full runtime via the agent runtime SDK. It can search files, read docs, and reason through problems autonomously.",
+      "difficulty": "advanced",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        9,
+        10
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-agent-complexity-5-multi-agent-py",
+      "slug": "agents-agent-complexity-5-multi-agent",
+      "title": "Level 5: Multi-Agent Orchestration — Delegated Autonomy",
+      "summary": "Level 5: Multi-Agent Orchestration — Delegated Autonomy An orchestrator delegates to specialized subagents defined via the agent runtime SDK. Each subagent has its own prompt, tools, and model. The orchestrator coordinates.",
+      "difficulty": "advanced",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        9,
+        10
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-1-intelligence-py",
+      "slug": "agents-building-blocks-1-intelligence",
+      "title": "Intelligence: The \"brain\" that processes information and makes decisions using LLMs.",
+      "summary": "Intelligence: The \"brain\" that processes information and makes decisions using LLMs. This component handles context understanding, instruction following, and response generation.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-2-memory-py",
+      "slug": "agents-building-blocks-2-memory",
+      "title": "Memory: Stores and retrieves relevant information across interactions.",
+      "summary": "Memory: Stores and retrieves relevant information across interactions. This component maintains conversation history and context to enable coherent multi-turn interactions.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-3-tools-py",
+      "slug": "agents-building-blocks-3-tools",
+      "title": "Tools: Enables agents to execute specific actions in external systems.",
+      "summary": "Tools: Enables agents to execute specific actions in external systems. This component provides the capability to make API calls, database updates, file operations, and other practical actions.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-4-validation-py",
+      "slug": "agents-building-blocks-4-validation",
+      "title": "Validation: Ensures LLM outputs match predefined data schemas.",
+      "summary": "Validation: Ensures LLM outputs match predefined data schemas. This component provides schema validation and structured data parsing to guarantee consistent data formats for downstream code.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-5-control-py",
+      "slug": "agents-building-blocks-5-control",
+      "title": "Control: Provides deterministic decision-making and process flow control.",
+      "summary": "Control: Provides deterministic decision-making and process flow control. This component handles if/then logic, routing based on conditions, and process orchestration for predictable behavior.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-6-recovery-py",
+      "slug": "agents-building-blocks-6-recovery",
+      "title": "Recovery: Manages failures and exceptions gracefully in agent workflows.",
+      "summary": "Recovery: Manages failures and exceptions gracefully in agent workflows. This component implements retry logic, fallback processes, and error handling to ensure system resilience.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "agents-building-blocks-7-feedback-py",
+      "slug": "agents-building-blocks-7-feedback",
+      "title": "Feedback: Provides strategic points where human judgement is required.",
+      "summary": "Feedback: Provides strategic points where human judgement is required. This component implements approval workflows and human-in-the-loop processes for high-risk decisions or complex judgments.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        5,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-1-get-single-page-py",
+      "slug": "context-web-1-get-single-page",
+      "title": "Get Single Page",
+      "summary": "from docling.document_converter import DocumentConverter from openai import OpenAI from pydantic import BaseModel, HttpUrl client = OpenAI() converter = DocumentConverter() MODEL = \"gpt-4.1-nano\" # -------------------------------------------------------------- # Define the output",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-2-web-search-py",
+      "slug": "context-web-2-web-search",
+      "title": "Web Search",
+      "summary": "from typing import List from openai import OpenAI from pydantic import BaseModel client = OpenAI() MODEL = \"gpt-5-nano\" # use a reasoning model for better performance # -------------------------------------------------------------- # Define the output model # --------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-3-search-handbook-py",
+      "slug": "context-web-3-search-handbook",
+      "title": "Search Handbook",
+      "summary": "",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-4-search-agent-py",
+      "slug": "context-web-4-search-agent",
+      "title": "Search Agent",
+      "summary": "import json from openai import OpenAI from tools import ( AgentAnswer, get_handbook_tool, get_web_page, get_web_page_tool, get_web_search_tool, search_handbook, ) MODEL = \"gpt-4.1\" client = OpenAI() SYSTEM_PROMPT = You are a research assistant for Dutch government organizations. ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-5-interactive-agent-py",
+      "slug": "context-web-5-interactive-agent",
+      "title": "Interactive Agent",
+      "summary": "from tools import SearchAgent def main(): Run interactive terminal agent. agent = SearchAgent() print(\"=\" * 70) print(\"Research Assistant for Dutch Government Organizations\") print(\"=\" * 70) print(\"\\nType 'quit' or 'exit' to end the conversation.\") print(\"Type 'reset' to clear co",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-tools-agent-py",
+      "slug": "context-web-tools-agent",
+      "title": "Agent",
+      "summary": "import json import os from typing import List from openai import OpenAI from dotenv import load_dotenv from .get_web_page import get_web_page, get_tool_definition as get_web_page_tool from .models import AgentAnswer from .search_handbook import search_handbook, get_tool_definitio",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-tools-get_web_page-py",
+      "slug": "context-web-tools-get-web-page",
+      "title": "Get Web Page",
+      "summary": "from docling.document_converter import DocumentConverter converter = DocumentConverter() def get_web_page(url: str) -> str: Fetch and convert a web page to markdown. page_content = converter.convert(url) return page_content.document.export_to_markdown() def get_tool_definition():",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-tools-models-py",
+      "slug": "context-web-tools-models",
+      "title": "Models",
+      "summary": "from typing import List from pydantic import BaseModel class Citation(BaseModel): text: str url: str = None section: str = None class AgentAnswer(BaseModel): answer: str citations: List[Citation]",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-tools-search_handbook-py",
+      "slug": "context-web-tools-search-handbook",
+      "title": "Search Handbook",
+      "summary": "from pathlib import Path HANDBOOK_PATH = Path(__file__).parent.parent / \"data\" / \"handbook.md\" def search_handbook(query: str) -> str: Retrieve the handbook content for the agent to interpret. Note: The query parameter is accepted but not used - we return the full handbook. This ",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "context-web-tools-web_search-py",
+      "slug": "context-web-tools-web-search",
+      "title": "Web Search",
+      "summary": "def get_tool_definition(allowed_domains: list = None): Get web search tool definition for responses API. tool = { \"type\": \"web_search\", } if allowed_domains: tool[\"filters\"] = {\"allowed_domains\": allowed_domains} return tool",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-notebooks-1-introduction-1-notebook-to-web-app-ipynb",
+      "slug": "frameworks-notebooks-1-introduction-1-notebook-to-web-app",
+      "title": "Tutorial: Notebook to Web App in Five Minutes",
+      "summary": "This notebook shows how to turn a small Python function into a shareable interface with Gradio or Streamlit. It focuses on one clear input -> processing -> output flow so the app wrapper stays explicit and easy to review.",
+      "difficulty": "beginner",
+      "libraries": [
+        "gradio",
+        "streamlit"
+      ],
+      "principle_ids": [
+        1,
+        4,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "streamlit",
+        "gradio"
+      ],
+      "version": "38da1a906326",
+      "last_updated": "2026-03-21T10:08:39Z",
+      "changelog": [],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-2-getting-started-quickstart-py",
+      "slug": "frameworks-pydantic-ai-2-getting-started-quickstart",
+      "title": "Quickstart",
+      "summary": "from typing import Literal from pydantic_ai import Agent from pydantic_ai.models.openai import OpenAIChatModel from pydantic import BaseModel import nest_asyncio nest_asyncio.apply() # Needed to run interactive python # ------------------------------------------------------------",
+      "difficulty": "beginner",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-1-agents-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-1-agents",
+      "title": "Agents",
+      "summary": "from datetime import date import json import nest_asyncio from pydantic_ai import Agent nest_asyncio.apply() # -------------------------------------------------------------- # Static instructions - defined at agent creation # ------------------------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-2-dependencies-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-2-dependencies",
+      "title": "Dependencies",
+      "summary": "from datetime import date import json from typing import Literal import nest_asyncio from pydantic import BaseModel from pydantic_ai import Agent, RunContext nest_asyncio.apply() # -------------------------------------------------------------- # Without dependencies - limited con",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-3-tools-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-3-tools",
+      "title": "Tools",
+      "summary": "import json import nest_asyncio from pydantic import BaseModel from pydantic_ai import Agent, RunContext from youtube_transcript_api import YouTubeTranscriptApi from utils.youtube import extract_video_id nest_asyncio.apply() class Transcript(BaseModel): video_id: str language: st",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-4-output-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-4-output",
+      "title": "Output",
+      "summary": "import nest_asyncio from pydantic import BaseModel from pydantic_ai import Agent, RunContext, ModelResponse nest_asyncio.apply() # -------------------------------------------------------------- # Basic output # -------------------------------------------------------------- class ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-5-messages-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-5-messages",
+      "title": "Messages",
+      "summary": "import json import nest_asyncio from pydantic_ai import Agent, ModelMessage nest_asyncio.apply() # -------------------------------------------------------------- # Accessing messages from results # -------------------------------------------------------------- agent = Agent(\"open",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-3-core-concepts-6-direct-py",
+      "slug": "frameworks-pydantic-ai-3-core-concepts-6-direct",
+      "title": "Direct",
+      "summary": "",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-5-tools-and-toolsets-human-in-the-loop-1-tool-requires-approval-ipynb",
+      "slug": "frameworks-pydantic-ai-5-tools-and-toolsets-human-in-the-loop-1-tool-requires-approval",
+      "title": "Tool Requires Approval",
+      "summary": "{ \"cells\": [ { \"cell_type\": \"code\", \"execution_count\": 1, \"id\": \"0cba1839\", \"metadata\": {}, \"outputs\": [], \"source\": [ \"from pydantic_ai import (\\n\", \" Agent,\\n\", \" ApprovalRequired,\\n\", \" DeferredToolRequests,\\n\", \" DeferredToolResults,\\n\", \" RunContext,\\n\", \" ToolDenied,\\n\", \")",
+      "difficulty": "intermediate",
+      "libraries": [
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "frameworks-pydantic-ai-5-tools-and-toolsets-human-in-the-loop-2-banking-assisant-py",
+      "slug": "frameworks-pydantic-ai-5-tools-and-toolsets-human-in-the-loop-2-banking-assisant",
+      "title": "Banking Assisant",
+      "summary": "import nest_asyncio from dataclasses import dataclass from typing import Union from pydantic import BaseModel from rich.console import Console from rich.panel import Panel from rich.prompt import Confirm from pydantic_ai import Agent, RunContext, ToolDenied from pydantic_ai.messa",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-docling-1-extraction-py",
+      "slug": "knowledge-docling-1-extraction",
+      "title": "Extraction",
+      "summary": "from docling.document_converter import DocumentConverter from utils.sitemap import get_sitemap_urls converter = DocumentConverter() # -------------------------------------------------------------- # Basic PDF extraction # ----------------------------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "ipykernel",
+        "lancedb",
+        "openai",
+        "pydantic",
+        "python-dotenv",
+        "requests",
+        "streamlit",
+        "tiktoken"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY",
+        "streamlit"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-docling-2-chunking-py",
+      "slug": "knowledge-docling-2-chunking",
+      "title": "Chunking",
+      "summary": "from docling.chunking import HybridChunker from docling.document_converter import DocumentConverter from dotenv import load_dotenv from openai import OpenAI from utils.tokenizer import OpenAITokenizerWrapper load_dotenv() # Initialize OpenAI client (make sure you have OPENAI_API_",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "ipykernel",
+        "lancedb",
+        "openai",
+        "pydantic",
+        "python-dotenv",
+        "requests",
+        "streamlit",
+        "tiktoken"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY",
+        "streamlit"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-docling-3-embedding-py",
+      "slug": "knowledge-docling-3-embedding",
+      "title": "Embedding",
+      "summary": "from typing import List import lancedb from docling.chunking import HybridChunker from docling.document_converter import DocumentConverter from dotenv import load_dotenv from lancedb.embeddings import get_registry from lancedb.pydantic import LanceModel, Vector from openai import",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "ipykernel",
+        "lancedb",
+        "openai",
+        "pydantic",
+        "python-dotenv",
+        "requests",
+        "streamlit",
+        "tiktoken"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY",
+        "streamlit"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-docling-4-search-py",
+      "slug": "knowledge-docling-4-search",
+      "title": "Search",
+      "summary": "import lancedb # -------------------------------------------------------------- # Connect to the database # -------------------------------------------------------------- uri = \"data/lancedb\" db = lancedb.connect(uri) # ------------------------------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "ipykernel",
+        "lancedb",
+        "openai",
+        "pydantic",
+        "python-dotenv",
+        "requests",
+        "streamlit",
+        "tiktoken"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY",
+        "streamlit"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-docling-5-chat-py",
+      "slug": "knowledge-docling-5-chat",
+      "title": "Chat",
+      "summary": "import streamlit as st import lancedb from openai import OpenAI from dotenv import load_dotenv # Load environment variables load_dotenv() # Initialize OpenAI client client = OpenAI() # Initialize LanceDB connection .cache_resource def init_db(): Initialize database connection. Re",
+      "difficulty": "intermediate",
+      "libraries": [
+        "docling",
+        "ipykernel",
+        "lancedb",
+        "openai",
+        "pydantic",
+        "python-dotenv",
+        "requests",
+        "streamlit",
+        "tiktoken"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY",
+        "streamlit"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-01-mem0-cloud-quickstart-py",
+      "slug": "knowledge-mem0-01-mem0-cloud-quickstart",
+      "title": "Mem0 Cloud Quickstart",
+      "summary": "from mem0 import MemoryClient from dotenv import load_dotenv import os load_dotenv(\".env\") # -------------------------------------------------------------- # Initialize Mem0 client (Cloud) # -------------------------------------------------------------- client = MemoryClient(api_",
+      "difficulty": "beginner",
+      "libraries": [
+        "mem0",
+        "mem0ai",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-02-mem0-oss-quickstart-py",
+      "slug": "knowledge-mem0-02-mem0-oss-quickstart",
+      "title": "Mem0 Oss Quickstart",
+      "summary": "from mem0 import Memory from dotenv import load_dotenv load_dotenv(\".env\") m = Memory() # Requires OpenAI API key # -------------------------------------------------------------- # Message sequence # -------------------------------------------------------------- messages = [ { \"r",
+      "difficulty": "beginner",
+      "libraries": [
+        "mem0",
+        "mem0ai",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-cloud-email_example-py",
+      "slug": "knowledge-mem0-cloud-email-example",
+      "title": "Email Example",
+      "summary": "from mem0 import MemoryClient from email.parser import Parser from dotenv import load_dotenv load_dotenv(\"../.env\") # Initialize Mem0 client client = MemoryClient() class EmailProcessor: def __init__(self): Initialize the Email Processor with Mem0 memory client self.client = clie",
+      "difficulty": "intermediate",
+      "libraries": [
+        "mem0",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-oss-config-py",
+      "slug": "knowledge-mem0-oss-config",
+      "title": "Config",
+      "summary": "config = { \"vector_store\": { \"provider\": \"qdrant\", \"config\": {\"host\": \"localhost\", \"port\": 6333}, }, \"llm\": { \"provider\": \"openai\", \"config\": {\"api_key\": \"your-api-key\", \"model\": \"gpt-4\"}, }, \"embedder\": { \"provider\": \"openai\", \"config\": {\"api_key\": \"your-api-key\", \"model\": \"text",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-oss-memory_demo-py",
+      "slug": "knowledge-mem0-oss-memory-demo",
+      "title": "Memory Demo",
+      "summary": "from openai import OpenAI from mem0 import Memory from dotenv import load_dotenv load_dotenv(\"../.env\") config = { \"vector_store\": { \"provider\": \"qdrant\", \"config\": {\"host\": \"localhost\", \"port\": 6333}, }, } openai_client = OpenAI() memory = Memory.from_config(config) def chat_wit",
+      "difficulty": "intermediate",
+      "libraries": [
+        "mem0",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "knowledge-mem0-oss-support_agent-py",
+      "slug": "knowledge-mem0-oss-support-agent",
+      "title": "Support Agent",
+      "summary": "from openai import OpenAI from mem0 import Memory from dotenv import load_dotenv load_dotenv(\"../.env\") class CustomerSupportAIAgent: def __init__(self): Initialize the CustomerSupportAIAgent with memory configuration and OpenAI client. # ! Make sure qdrant is running (see docker",
+      "difficulty": "intermediate",
+      "libraries": [
+        "mem0",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        3,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-3-simple-server-setup-client-sse-py",
+      "slug": "mcp-crash-course-3-simple-server-setup-client-sse",
+      "title": "Client Sse",
+      "summary": "import asyncio import nest_asyncio from mcp import ClientSession from mcp.client.sse import sse_client nest_asyncio.apply() # Needed to run interactive python Make sure: 1. The server is running before running this script. 2. The server is configured to use SSE transport. 3. The ",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-3-simple-server-setup-client-stdio-py",
+      "slug": "mcp-crash-course-3-simple-server-setup-client-stdio",
+      "title": "Client Stdio",
+      "summary": "import asyncio import nest_asyncio from mcp import ClientSession, StdioServerParameters from mcp.client.stdio import stdio_client nest_asyncio.apply() # Needed to run interactive python async def main(): # Define server parameters server_params = StdioServerParameters( command=\"p",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-3-simple-server-setup-client-streamable-http-py",
+      "slug": "mcp-crash-course-3-simple-server-setup-client-streamable-http",
+      "title": "Client Streamable Http",
+      "summary": "import asyncio import nest_asyncio from mcp import ClientSession from mcp.client.streamable_http import streamablehttp_client nest_asyncio.apply() # Needed to run interactive python Make sure: 1. The server is running before running this script. 2. The server is configured to use",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-3-simple-server-setup-server-py",
+      "slug": "mcp-crash-course-3-simple-server-setup-server",
+      "title": "Server",
+      "summary": "from mcp.server.fastmcp import FastMCP from dotenv import load_dotenv load_dotenv(\"../.env\") # Create an MCP server mcp = FastMCP( name=\"Calculator\", host=\"0.0.0.0\", # only used for SSE transport (localhost) port=8050, # only used for SSE transport (set this to any port) stateles",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-4-openai-integration-client-simple-py",
+      "slug": "mcp-crash-course-4-openai-integration-client-simple",
+      "title": "Client Simple",
+      "summary": "import asyncio import json from contextlib import AsyncExitStack from typing import Any, Dict, List import nest_asyncio from dotenv import load_dotenv from mcp import ClientSession, StdioServerParameters from mcp.client.stdio import stdio_client from openai import AsyncOpenAI # A",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-4-openai-integration-client-py",
+      "slug": "mcp-crash-course-4-openai-integration-client",
+      "title": "Client",
+      "summary": "import asyncio import json from contextlib import AsyncExitStack from typing import Any, Dict, List, Optional import nest_asyncio from dotenv import load_dotenv from mcp import ClientSession, StdioServerParameters from mcp.client.stdio import stdio_client from openai import Async",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp",
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-4-openai-integration-server-py",
+      "slug": "mcp-crash-course-4-openai-integration-server",
+      "title": "Server",
+      "summary": "import os import json from mcp.server.fastmcp import FastMCP # Create an MCP server mcp = FastMCP( name=\"Knowledge Base\", host=\"0.0.0.0\", # only used for SSE transport (localhost) port=8050, # only used for SSE transport (set this to any port) ) .tool() def get_knowledge_base() -",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-5-mcp-vs-function-calling-function-calling-py",
+      "slug": "mcp-crash-course-5-mcp-vs-function-calling-function-calling",
+      "title": "Function Calling",
+      "summary": "import json import openai from dotenv import load_dotenv from tools import add load_dotenv(\"../.env\") This is a simple example to demonstrate that MCP simply enables a new way to call functions. # Define tools for the model tools = [ { \"type\": \"function\", \"function\": { \"name\": \"a",
+      "difficulty": "advanced",
+      "libraries": [
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-5-mcp-vs-function-calling-tools-py",
+      "slug": "mcp-crash-course-5-mcp-vs-function-calling-tools",
+      "title": "Tools",
+      "summary": "def add(a: int, b: int) -> int: Add two numbers together return a + b",
+      "difficulty": "advanced",
+      "libraries": [],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-6-run-with-docker-client-py",
+      "slug": "mcp-crash-course-6-run-with-docker-client",
+      "title": "Client",
+      "summary": "import asyncio import nest_asyncio from mcp import ClientSession from mcp.client.sse import sse_client nest_asyncio.apply() # Needed to run interactive python Make sure: 1. The server is running before running this script. 2. The server is configured to use SSE transport. 3. The ",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp",
+        "mcp[cli]"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-crash-course-6-run-with-docker-server-py",
+      "slug": "mcp-crash-course-6-run-with-docker-server",
+      "title": "Server",
+      "summary": "from mcp.server.fastmcp import FastMCP from dotenv import load_dotenv load_dotenv(\"../.env\") # Create an MCP server mcp = FastMCP( name=\"Calculator\", host=\"0.0.0.0\", # only used for SSE transport port=8050, # only used for SSE transport (set this to any port) ) # Add a simple cal",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp",
+        "mcp[cli]",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-servers-youtube-server-py",
+      "slug": "mcp-servers-youtube-server",
+      "title": "Server",
+      "summary": "",
+      "difficulty": "advanced",
+      "libraries": [
+        "mcp"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-servers-youtube-src-service-py",
+      "slug": "mcp-servers-youtube-src-service",
+      "title": "Service",
+      "summary": "import os from requests import Session from youtube_transcript_api import YouTubeTranscriptApi from youtube_transcript_api.formatters import ( TextFormatter, ) from youtube_transcript_api.proxies import WebshareProxyConfig from .utils import extract_video_id class YouTubeTranscri",
+      "difficulty": "advanced",
+      "libraries": [
+        "requests"
+      ],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "mcp-servers-youtube-test-py",
+      "slug": "mcp-servers-youtube-test",
+      "title": "Test",
+      "summary": "from server import get_transcript t = get_transcript(\") print(t)",
+      "difficulty": "advanced",
+      "libraries": [],
+      "principle_ids": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-01-introduction-01-introduction-py",
+      "slug": "models-openai-01-introduction-01-introduction",
+      "title": "Introduction",
+      "summary": "from openai import OpenAI from dotenv import load_dotenv import os load_dotenv() client = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\"))",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-01-introduction-02-making-requests-py",
+      "slug": "models-openai-01-introduction-02-making-requests",
+      "title": "Making Requests",
+      "summary": "from openai import OpenAI # The OpenAI class will automatically use the OPENAI_API_KEY environment variable client = OpenAI()",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-01-introduction-03-streaming-py",
+      "slug": "models-openai-01-introduction-03-streaming",
+      "title": "Streaming",
+      "summary": "from openai import OpenAI client = OpenAI() stream = client.chat.completions.create( model=\"gpt-4\", messages=[{\"role\": \"user\", \"content\": \"Say this is a test\"}], stream=True, ) for chunk in stream: if chunk.choices[0].delta.content is not None: print(chunk.choices[0].delta.conten",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-01-introduction-py",
+      "slug": "models-openai-04-structured-output-01-introduction",
+      "title": "Introduction",
+      "summary": "from openai import OpenAI import json client = OpenAI() def send_reply(message: str): print(f\"Sending reply: {message}\") # -------------------------------------------------------------- # Unstructured output example # --------------------------------------------------------------",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-02-json-mode-py",
+      "slug": "models-openai-04-structured-output-02-json-mode",
+      "title": "Json Mode",
+      "summary": "from openai import OpenAI import json client = OpenAI() def send_reply(message: str): print(f\"Sending reply: {message}\") # -------------------------------------------------------------- # Structured output example using response_format # ------------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-03-function-calling-py",
+      "slug": "models-openai-04-structured-output-03-function-calling",
+      "title": "Function Calling",
+      "summary": "from openai import OpenAI import json client = OpenAI() def send_reply(message: str): print(f\"Sending reply: {message}\") # -------------------------------------------------------------- # Structured output example using function calling # -----------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-04-structured-output-py",
+      "slug": "models-openai-04-structured-output-04-structured-output",
+      "title": "Structured Output",
+      "summary": "from enum import Enum import json import requests from bs4 import BeautifulSoup from openai import OpenAI from pydantic import BaseModel, Field client = OpenAI() MODEL = \"gpt-4o-2024-08-06\" query = Hi, I'm having trouble with my recent order. I received the wrong item and need to",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-instructor-01-instructor-py",
+      "slug": "models-openai-04-structured-output-instructor-01-instructor",
+      "title": "Instructor",
+      "summary": "import instructor from pydantic import BaseModel, Field from openai import OpenAI from enum import Enum def send_reply(message: str): print(f\"Sending reply: {message}\") # -------------------------------------------------------------- # Instructor structured output example # -----",
+      "difficulty": "intermediate",
+      "libraries": [
+        "instructor",
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-instructor-02-output-validation-py",
+      "slug": "models-openai-04-structured-output-instructor-02-output-validation",
+      "title": "Output Validation",
+      "summary": "import instructor from pydantic import BaseModel, Field from openai import OpenAI from enum import Enum # -------------------------------------------------------------- # Instructor Retry Example with Enum Category # -------------------------------------------------------------- ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "instructor",
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-instructor-03-content-filtering-py",
+      "slug": "models-openai-04-structured-output-instructor-03-content-filtering",
+      "title": "Content Filtering",
+      "summary": "import instructor from pydantic import BaseModel, Field from openai import OpenAI from pydantic import BeforeValidator from typing_extensions import Annotated from instructor import llm_validator def send_reply(message: str): print(f\"Sending reply: {message}\") # -----------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "instructor",
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-04-structured-output-instructor-04-ticket-system-py",
+      "slug": "models-openai-04-structured-output-instructor-04-ticket-system",
+      "title": "Ticket System",
+      "summary": "import instructor from pydantic import BaseModel, Field from openai import OpenAI from enum import Enum # -------------------------------------------------------------- # Ticket System Example with Structured Output # --------------------------------------------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "instructor",
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-01-introduction-py",
+      "slug": "models-openai-05-responses-01-introduction",
+      "title": "Introduction",
+      "summary": "from openai import OpenAI client = OpenAI() # -------------------------------------------------------------- # Basic text example with the Chat Completions API # -------------------------------------------------------------- response = client.chat.completions.create( model=\"gpt-4",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-02-text-prompting-py",
+      "slug": "models-openai-05-responses-02-text-prompting",
+      "title": "Text Prompting",
+      "summary": "from openai import OpenAI client = OpenAI() Model spec: Dashboard: # -------------------------------------------------------------- # Introducing instructions # -------------------------------------------------------------- Inputs can now be a single string or a list of messages.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-03-conversation-state-py",
+      "slug": "models-openai-05-responses-03-conversation-state",
+      "title": "Conversation State",
+      "summary": "from openai import OpenAI client = OpenAI() # -------------------------------------------------------------- # Manual conversation state # -------------------------------------------------------------- response = client.responses.create( model=\"gpt-4o-mini\", input=[ {\"role\": \"use",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-04-function-calling-py",
+      "slug": "models-openai-05-responses-04-function-calling",
+      "title": "Function Calling",
+      "summary": "from openai import OpenAI client = OpenAI() tools = [ { \"type\": \"function\", \"name\": \"send_email\", \"description\": \"Send an email to a given recipient with a subject and message.\", \"parameters\": { \"type\": \"object\", \"properties\": { \"to\": {\"type\": \"string\", \"description\": \"The recipi",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-05-structured-output-py",
+      "slug": "models-openai-05-responses-05-structured-output",
+      "title": "Structured Output",
+      "summary": "import json from typing import List from openai import OpenAI from pydantic import BaseModel client = OpenAI() # -------------------------------------------------------------- # Using a JSON Schema # -------------------------------------------------------------- response = client",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-06-web-search-py",
+      "slug": "models-openai-05-responses-06-web-search",
+      "title": "Web Search",
+      "summary": "from openai import OpenAI client = OpenAI() # -------------------------------------------------------------- # Basic web search # -------------------------------------------------------------- response = client.responses.create( model=\"gpt-4o\", tools=[ { \"type\": \"web_search_previ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-07-file-search-py",
+      "slug": "models-openai-05-responses-07-file-search",
+      "title": "File Search",
+      "summary": "import requests from io import BytesIO from openai import OpenAI import textwrap client = OpenAI() # -------------------------------------------------------------- # Upload a file # -------------------------------------------------------------- def create_file(client, file_path):",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "requests"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-05-responses-08-reasoning-py",
+      "slug": "models-openai-05-responses-08-reasoning",
+      "title": "Reasoning",
+      "summary": "from openai import OpenAI client = OpenAI() prompt = Write a bash script that takes a matrix represented as a string with format '[1,2],[3,4],[5,6]' and prints the transpose in the same format. response = client.responses.create( model=\"o3-mini\", reasoning={\"effort\": \"medium\"}, i",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        4,
+        6,
+        7,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-06-agents-01-introduction-py",
+      "slug": "models-openai-06-agents-01-introduction",
+      "title": "Introduction",
+      "summary": "from agents import Agent, Runner import nest_asyncio nest_asyncio.apply() agent = Agent(name=\"Assistant\", instructions=\"You are a helpful assistant\") result = Runner.run_sync(agent, \"Write a haiku about recursion in programming.\") print(result.final_output)",
+      "difficulty": "beginner",
+      "libraries": [],
+      "principle_ids": [],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-06-agents-02-handoffs-py",
+      "slug": "models-openai-06-agents-02-handoffs",
+      "title": "Handoffs",
+      "summary": "from agents import Agent, Runner import asyncio import nest_asyncio nest_asyncio.apply() tech_support_agent = Agent( name=\"Tech Support Agent\", instructions=\"You handle technical issues with our product. Be concise and helpful.\", ) billing_agent = Agent( name=\"Billing Agent\", ins",
+      "difficulty": "intermediate",
+      "libraries": [],
+      "principle_ids": [],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-07-gpt-oss-gpt-oss-py",
+      "slug": "models-openai-07-gpt-oss-gpt-oss",
+      "title": "Gpt Oss",
+      "summary": "from pydantic import BaseModel from pydantic_ai import Agent from pydantic_ai.models.openai import OpenAIChatModel from pydantic_ai.providers.openai import OpenAIProvider import nest_asyncio nest_asyncio.apply() class CityLocation(BaseModel): city: str country: str ollama_model =",
+      "difficulty": "intermediate",
+      "libraries": [
+        "pydantic"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-1-sora-quickstart-py",
+      "slug": "models-openai-08-video-1-sora-quickstart",
+      "title": "Sora Quickstart",
+      "summary": "import sys import time from openai import OpenAI openai = OpenAI() # -------------------------------------------------------------- # Create a new video # -------------------------------------------------------------- # Takes about 2 minutes video = openai.videos.create( model=\"s",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-2-references-py",
+      "slug": "models-openai-08-video-2-references",
+      "title": "References",
+      "summary": "import time from openai import OpenAI from pathlib import Path import base64 from utils.resizer import resize_image from utils.downloader import download_sora_video openai = OpenAI() # -------------------------------------------------------------- # Generate a reference image # -",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-3-sora-pro-model-py",
+      "slug": "models-openai-08-video-3-sora-pro-model",
+      "title": "Sora Pro Model",
+      "summary": "from openai import OpenAI from utils.downloader import download_sora_video openai = OpenAI() # -------------------------------------------------------------- # Generate a video with Sora Pro mode # -------------------------------------------------------------- # Stays stuck in pr",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-4-sora-prompting-py",
+      "slug": "models-openai-08-video-4-sora-prompting",
+      "title": "Sora Prompting",
+      "summary": "from utils.director import SoraDirector from utils.downloader import download_sora_video from openai import OpenAI openai = OpenAI() director = SoraDirector() # -------------------------------------------------------------- # Generate a Sora prompt # -----------------------------",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-5-sora-remix-py",
+      "slug": "models-openai-08-video-5-sora-remix",
+      "title": "Sora Remix",
+      "summary": "import os from datetime import datetime from openai import OpenAI from utils.downloader import download_sora_video openai = OpenAI() # Character description for consistency CHARACTER = ( \"A 30-year-old male programmer with short dark hair, beard, wearing a black t-shirt\" ) shots ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-08-video-6-sora-sequence-py",
+      "slug": "models-openai-08-video-6-sora-sequence",
+      "title": "Sora Sequence",
+      "summary": "import os import subprocess import tempfile import sys from pathlib import Path # -------------------------------------------------------------- # Find most recent sequence folder or use provided path # -------------------------------------------------------------- # Check if a v",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pillow",
+        "pydantic",
+        "python-dotenv",
+        "requests"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-09-web-web_search-py",
+      "slug": "models-openai-09-web-web-search",
+      "title": "Web Search",
+      "summary": "from openai import OpenAI client = OpenAI() response = client.responses.create( model=\"gpt-5-mini\", reasoning={\"effort\": \"low\"}, tools=[ { \"type\": \"web_search\", \"filters\": { \"allowed_domains\": [ \"pubmed.ncbi.nlm.nih.gov\", \"clinicaltrials.gov\", \" \" \" ] }, } ], tool_choice=\"auto\", ",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-10-human-in-the-loop-1-structured-output-py",
+      "slug": "models-openai-10-human-in-the-loop-1-structured-output",
+      "title": "Human-in-the-Loop: Structured Output with Router",
+      "summary": "Human-in-the-Loop: Structured Output with Router",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "models-openai-10-human-in-the-loop-2-tool-call-approval-py",
+      "slug": "models-openai-10-human-in-the-loop-2-tool-call-approval",
+      "title": "Human-in-the-Loop: Tool Call Approval",
+      "summary": "Human-in-the-Loop: Tool Call Approval",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-1-introduction-1-basic-py",
+      "slug": "workflows-1-introduction-1-basic",
+      "title": "Basic",
+      "summary": "import os from openai import OpenAI client = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\")) completion = client.chat.completions.create( model=\"gpt-4o\", messages=[ {\"role\": \"system\", \"content\": \"You're a helpful assistant.\"}, { \"role\": \"user\", \"content\": \"Write a limerick about the ",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-1-introduction-2-structured-py",
+      "slug": "workflows-1-introduction-2-structured",
+      "title": "Structured",
+      "summary": "import os from openai import OpenAI from pydantic import BaseModel client = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\")) # -------------------------------------------------------------- # Step 1: Define the response format in a Pydantic model # ------------------------------------",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-1-introduction-3-tools-py",
+      "slug": "workflows-1-introduction-3-tools",
+      "title": "Tools",
+      "summary": "import json import os import requests from openai import OpenAI from pydantic import BaseModel, Field client = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\")) docs: # -------------------------------------------------------------- # Define the tool (function) that we want to call # --",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "requests"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-1-introduction-4-retrieval-py",
+      "slug": "workflows-1-introduction-4-retrieval",
+      "title": "Retrieval",
+      "summary": "import json import os from openai import OpenAI from pydantic import BaseModel, Field client = OpenAI(api_key=os.getenv(\"OPENAI_API_KEY\")) docs: # -------------------------------------------------------------- # Define the knowledge base retrieval tool # -------------------------",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-2-workflow-patterns-1-prompt-chaining-py",
+      "slug": "workflows-2-workflow-patterns-1-prompt-chaining",
+      "title": "Prompt Chaining",
+      "summary": "from typing import Optional from datetime import datetime from pydantic import BaseModel, Field from openai import OpenAI import os import logging # Set up logging configuration logging.basicConfig( level=logging.INFO, format=\"%(asctime)s - %(levelname)s - %(message)s\", datefmt=\"",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-2-workflow-patterns-2-routing-py",
+      "slug": "workflows-2-workflow-patterns-2-routing",
+      "title": "Routing",
+      "summary": "from typing import Optional, Literal from pydantic import BaseModel, Field from openai import OpenAI import os import logging # Set up logging configuration logging.basicConfig( level=logging.INFO, format=\"%(asctime)s - %(levelname)s - %(message)s\", datefmt=\"%Y-%m-%d %H:%M:%S\", )",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-2-workflow-patterns-3-parallizaton-py",
+      "slug": "workflows-2-workflow-patterns-3-parallizaton",
+      "title": "Parallizaton",
+      "summary": "import asyncio import logging import os import nest_asyncio from openai import AsyncOpenAI from pydantic import BaseModel, Field nest_asyncio.apply() # Set up logging configuration logging.basicConfig( level=logging.INFO, format=\"%(asctime)s - %(levelname)s - %(message)s\", datefm",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    },
+    {
+      "id": "workflows-2-workflow-patterns-4-orchestrator-py",
+      "slug": "workflows-2-workflow-patterns-4-orchestrator",
+      "title": "Orchestrator",
+      "summary": "from typing import List, Dict from pydantic import BaseModel, Field from openai import OpenAI import os import logging # Set up logging configuration logging.basicConfig( level=logging.INFO, format=\"%(asctime)s - %(levelname)s - %(message)s\", datefmt=\"%Y-%m-%d %H:%M:%S\", ) logger",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic"
+      ],
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "5fd90f57f8a1",
+      "last_updated": "2026-03-14T14:44:14Z",
+      "changelog": [
+        {
+          "version": "5fd90f57f8a1",
+          "committed_at": "2026-03-14T14:44:14Z",
+          "summary": "Build agentic AI coaching platform scaffold"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null
+    }
+  ]
+}

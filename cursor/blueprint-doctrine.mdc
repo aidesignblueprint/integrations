@@ -1,0 +1,59 @@
+---
+description: Agentic Design Blueprint doctrine rules
+source_commit: 3c8f0010a0cb4bf3bbc5304e77a0aceed9bdc227
+content_version: 3c8f0010a0cb
+---
+
+# Agentic Design Blueprint
+
+Use these rules when generating agentic product or workflow code.
+
+## 1. Design for delegation rather than direct manipulation
+- Slug: `design-for-delegation-rather-than-direct-manipulation`
+- Cluster: `delegation`
+- Guidance: Design experiences around the assignment of work, the expression of intent, the setting of constraints, and the review of results, rather than requiring users to execute each step manually.
+
+## 2. Ensure that background work remains perceptible
+- Slug: `ensure-that-background-work-remains-perceptible`
+- Cluster: `visibility`
+- Guidance: When the system is operating asynchronously or outside the user’s immediate focus, it should provide persistent and proportionate signals that work is continuing.
+
+## 3. Align feedback with the user’s level of attention
+- Slug: `align-feedback-with-the-user-s-level-of-attention`
+- Cluster: `visibility`
+- Guidance: The system should calibrate the depth and frequency of feedback according to whether the user is actively engaged, passively monitoring, or temporarily absent.
+
+## 4. Apply progressive disclosure to system agency
+- Slug: `apply-progressive-disclosure-to-system-agency`
+- Cluster: `trust`
+- Guidance: Provide the minimum information necessary by default, while enabling users to inspect additional detail when confidence, understanding, or intervention is required.
+
+## 5. Replace implied magic with clear mental models
+- Slug: `replace-implied-magic-with-clear-mental-models`
+- Cluster: `delegation`
+- Guidance: The product should help users understand what the system can do, what it is currently doing, what it cannot do, and what conditions govern its behaviour.
+
+## 6. Expose meaningful operational state, not internal complexity
+- Slug: `expose-meaningful-operational-state-not-internal-complexity`
+- Cluster: `visibility`
+- Guidance: Present the state of the system in language and structures that are relevant to the user, rather than exposing low-level internals that do not support action or understanding.
+
+## 7. Establish trust through inspectability
+- Slug: `establish-trust-through-inspectability`
+- Cluster: `trust`
+- Guidance: Users should be able to examine how a result was produced when confidence, accountability, or decision quality is important.
+
+## 8. Make hand-offs, approvals, and blockers explicit
+- Slug: `make-hand-offs-approvals-and-blockers-explicit`
+- Cluster: `trust`
+- Guidance: When the system cannot proceed, the reason should be immediately visible, along with any action required from the user or another dependency.
+
+## 9. Represent delegated work as a system, not merely as a conversation
+- Slug: `represent-delegated-work-as-a-system-not-merely-as-a-conversation`
+- Cluster: `orchestration`
+- Guidance: Where work involves multiple steps, agents, dependencies, or concurrent activities, it should be represented as a structured system rather than solely as a message stream.
+
+## 10. Optimise for steering, not only initiating
+- Slug: `optimise-for-steering-not-only-initiating`
+- Cluster: `delegation`
+- Guidance: The system should support users not only in starting tasks, but also in guiding, refining, reprioritising, and correcting work while it is underway.
