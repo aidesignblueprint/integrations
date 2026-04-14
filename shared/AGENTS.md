@@ -28,7 +28,7 @@ Use this doctrine when building or reviewing AI-native features, coding agents, 
 - Examples: `https://aidesignblueprint.com/examples`
 - Download hub: `https://aidesignblueprint.com/en/for-agents`
 
-Public read-only MCP tools:
+Public retrieval MCP tools:
 
 - `list_principles(cluster?)`
 - `list_clusters()`
@@ -39,12 +39,27 @@ Public read-only MCP tools:
 - `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
 - `list_agent_assets()`
 
+Public signal MCP tools (write, opt-in — anonymous-allowed):
+
+- `report_value_event(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)` — records a value moment; only offer after clear user satisfaction; never call automatically or silently
+- `submit_feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)` — explicit qualitative feedback; only call on explicit user request
+
 Protected tools exist, but they are not part of the public anonymous setup path:
 
 - `get_my_learning_path()`
 - `get_my_coaching_context()`
-- `validate_agent_architecture(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `validate_agent_architecture(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?, private_session?)` — Pro/Teams only; set private_session=true to skip all server-side logging for that call
 - `add_evidence_note(course_slug, stage_id, note)`
+
+## Feedback and value signal rules
+
+- Only call `report_value_event` after the user has clearly expressed that something was useful.
+  Never call it automatically, never call it silently.
+  Offer at most once per session after a clear success signal. Do not offer again unless the user asks.
+- Only call `submit_feedback` when the user explicitly asks to leave feedback.
+  Never prompt for it without a clear signal from the user.
+- Never include proprietary code, file contents, or secrets in `brief_context`.
+- These tools only send the structured fields you pass. Static files send nothing.
 
 ## First prompt
 
