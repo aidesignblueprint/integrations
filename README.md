@@ -5,7 +5,7 @@ Official integrations and installable doctrine for AI Design Blueprint across MC
 ## What is in this repo
 
 - `shared/`: cross-tool doctrine files
-- `mcp/`: public read-only MCP configuration and usage notes
+- `mcp/`: public MCP configuration and usage notes
 - `docs/setup/`: copy-first setup guides by tool
 - `cursor/`, `windsurf/`, `github-copilot/`, `gemini/`: provider-specific instruction files
 - `open-weights/`: static prompt packs for open-weight and local model workflows
@@ -19,12 +19,6 @@ Canonical public endpoints:
 - MCP: `https://aidesignblueprint.com/mcp`
 - Developer docs: `https://aidesignblueprint.com/en/for-agents`
 
-The public MCP tier is:
-
-- read-only
-- safe for discovery
-- intended for doctrine and example retrieval
-
 ## Quick start
 
 1. Pick a setup guide in `docs/setup/`.
@@ -35,7 +29,9 @@ The public MCP tier is:
 5. Then run a second proof call:
    - `search_examples(query="orchestration visibility steering", limit=3)`
 
-## Public read-only MCP tools
+## Public MCP tools
+
+### Public retrieval tools (anonymous-allowed, read-only)
 
 - `list_principles(cluster?)`
 - `list_clusters()`
@@ -46,7 +42,26 @@ The public MCP tier is:
 - `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
 - `list_agent_assets()`
 
-Protected tools exist, but they are not part of the anonymous setup path.
+### Public signal tools (anonymous-allowed, opt-in write)
+
+- `report_value_event(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)` — records a value moment; only offer after the user clearly expresses something was useful; never call automatically or silently
+- `submit_feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)` — explicit qualitative feedback; only call when the user explicitly asks to leave feedback
+
+Signal tools write only the structured fields you pass. No prompts, no code, no file contents are stored. See the [privacy policy](https://aidesignblueprint.com/en/privacy) for full data-handling details.
+
+### Protected tools (authenticated, not part of anonymous setup path)
+
+- `get_my_learning_path()`
+- `get_my_coaching_context()`
+- `validate_agent_architecture(implementation_context, ..., private_session?)` — Pro/Teams; set `private_session=true` to skip all server-side logging for that call
+- `summarize_team_usage(days_back?, private_session?)` — Pro/Teams; usage reflection and recommended next assets
+- `add_evidence_note(course_slug, stage_id, note)`
+
+## Feedback and value signal rules
+
+- Only call `report_value_event` after the user has clearly expressed that something was useful. Never call automatically or silently. Offer at most once per session after a clear success signal.
+- Only call `submit_feedback` when the user explicitly asks to leave feedback. Never prompt for it proactively.
+- Never include proprietary code, file contents, or secrets in `brief_context`.
 
 ## What is intentionally not here yet
 
