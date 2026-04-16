@@ -41,6 +41,9 @@ Canonical public endpoints:
 - `search_principles(query, limit?)`
 - `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
 - `list_agent_assets()`
+- `list_application_guides()`
+- `get_application_guide(slug)`
+- `search_application_guides(query, limit?)`
 
 ### Public signal tools (anonymous-allowed, opt-in write)
 
