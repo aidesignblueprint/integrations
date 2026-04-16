@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-13T13:21:09+01:00",
-  "source_commit": "3c8f0010a0cb4bf3bbc5304e77a0aceed9bdc227",
-  "content_version": "3c8f0010a0cb",
+  "generated_at": "2026-04-16T20:05:16+01:00",
+  "source_commit": "b64819a0830c61ae54ca894de93ce4cbd5e135b9",
+  "content_version": "b64819a0830c",
   "title": "AI Design Principle Blueprint",
   "purpose": "This document defines the core design principles for AI-enabled products and services in which the system does more than respond to user inputs. It interprets intent, performs actions, coordinates processes, and completes work on the user’s behalf.\n\nConventional digital experiences were designed around direct interaction. In that model, the user remains the primary operator throughout the journey, progressing step by step through a sequence of actions.\n\nAI systems, particularly agentic systems, introduce a materially different model. In these environments, the user is no longer solely the operator of the interface. Instead, the user increasingly assumes the role of supervisor, director, or decision-maker, while the system undertakes execution.\n\nThis blueprint establishes the design principles required to support that transition responsibly and coherently.",
   "strategic_premise": "Traditional interaction design rests on several assumptions:\n\n* the user is continuously present\n* the user performs each material step directly\n* the user requires visibility of each stage of the process\n* the interface is the principal site of value creation\n\nThese assumptions weaken when AI systems are capable of acting independently, operating asynchronously, and coordinating work across tools, data sources, or multiple agents.\n\nIn an agentic context, the product experience is no longer defined solely by the visible interface. It is defined by the relationship between:\n\n* user intent\n* delegated authority\n* system execution\n* visibility and accountability\n* human intervention when required\n* review and acceptance of outcomes\n\nThe central design question therefore changes.\n\nIt is no longer only: **How does the user complete the task?**\n\nIt becomes: **How does the user delegate the task safely, remain appropriately informed, and intervene only when necessary?**",
@@ -913,9 +913,15 @@
         "streamlit",
         "gradio"
       ],
-      "version": "38da1a906326",
-      "last_updated": "2026-03-21T10:08:39Z",
-      "changelog": [],
+      "version": "1baa9d2a5f2d",
+      "last_updated": "2026-03-21T10:51:24Z",
+      "changelog": [
+        {
+          "version": "1baa9d2a5f2d",
+          "committed_at": "2026-03-21T10:51:24Z",
+          "summary": "Build example health workflow and protect LLM example sandboxes"
+        }
+      ],
       "deprecated_at": null,
       "replacement_example_slug": null
     },
@@ -3038,6 +3044,112 @@
       ],
       "deprecated_at": null,
       "replacement_example_slug": null
+    }
+  ],
+  "application_guides": [
+    {
+      "slug": "security-application",
+      "title": "AI Design Blueprint — Security application",
+      "summary": "How Principles 4 (progressive disclosure), 7 (inspectability), and 8 (explicit approvals) function as load-bearing security controls against memory injection, backdoor poisoning, and experience grafting.",
+      "principle_ids": [
+        4,
+        7,
+        8
+      ],
+      "sections": [
+        {
+          "question": "What is memory injection?",
+          "answer": "Attackers poison persistent memory through normal user queries — no special access required. The injected memory is then retrieved and acted upon by the agent as if it were legitimate context. Systems that store retrieved content directly into memory without validation are the most exposed.",
+          "items": [
+            "Validate external inputs against defined schemas before storing",
+            "Apply TTL-based expiration to long-lived memory entries",
+            "Enforce per-user memory isolation at the storage level",
+            "Flag content with instruction-like patterns before acting on it"
+          ]
+        },
+        {
+          "question": "What is experience grafting?",
+          "answer": "Fabricated 'successful experiences' are planted in memory stores and retrieved by the agent as legitimate precedent. The agent then repeats the fabricated behaviour, believing it to be an established pattern. This vector exploits retrieval-augmented systems that privilege historical experience.",
+          "items": [
+            "Use cryptographic integrity checks on persisted context",
+            "Apply trust scoring to retrieved experiences before acting on them",
+            "Audit memory stores periodically for anomalous entries",
+            "Prefer structured records over free-form narrative in memory"
+          ]
+        },
+        {
+          "question": "What does a layered defence require?",
+          "answer": "Four boundaries must be enforced independently. Input boundary: validate all external data before it reaches the reasoning layer. Storage boundary: isolate, expire, and integrity-check persisted context. Access boundary: enforce minimal permission footprint acquired at task time. Action boundary: gate irreversible actions at the tool-call level, not only at task initiation.",
+          "items": [
+            "No boundary alone is sufficient — all four must be active",
+            "Injected instructions must not be able to bypass confirmation gates",
+            "Permissions should be acquired at task time and expired after use",
+            "Treat tool responses as external data — schema-validate before reasoning"
+          ]
+        },
+        {
+          "question": "What does auditability require?",
+          "answer": "Principle 7 (inspectability) and Principle 4 (progressive disclosure) together require that the active permission set, tool invocations, and reasoning inputs are logged in a queryable format at task time. An agent that cannot be reconstructed after an incident cannot be governed.",
+          "items": [
+            "Log the active permission set at the start of each task",
+            "Emit structured audit events for every tool call with full context",
+            "Preserve logs for a retention period consistent with your regulatory environment",
+            "Design logs to be queryable and replay-capable, not append-only text streams"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "observable-evaluation",
+      "title": "AI Design Blueprint — Observable evaluation",
+      "summary": "How Principles 2 (background work perceptible), 6 (meaningful operational state), and 7 (inspectability) extend into the engineering measurement layer — closing the 72%/15% belief-execution gap with a three-tier metric framework and trace-first design.",
+      "principle_ids": [
+        2,
+        6,
+        7
+      ],
+      "sections": [
+        {
+          "question": "Why does traditional monitoring fail agents?",
+          "answer": "Standard monitoring tracks response times and error rates. Agents are non-deterministic — each prompt produces a novel execution path. Yesterday's metrics cannot detect today's failure mode. Principle 2 extends into the engineering layer: if the team cannot observe what the agent is doing, it cannot remain perceptible to anyone.",
+          "items": [
+            "Monitor tool selection patterns, not just response latency",
+            "Detect reasoning quality degradation, not only system errors",
+            "Track action completion rate as a first-class metric",
+            "Alert on context adherence drift across task types"
+          ]
+        },
+        {
+          "question": "What does a structured trace contain?",
+          "answer": "Principle 7 (inspectability) requires that the reasoning process is accessible on request. For engineering teams, this means every task run should emit a structured trace: tool calls with parameters, intermediate states, durations, and the decision rationale. Traces are the evidence base for governance, not a debugging afterthought.",
+          "items": [
+            "Tool call sequence with input parameters and output summaries",
+            "Intermediate reasoning states and confidence signals",
+            "Duration per step and total task wall time",
+            "Final decision rationale in a queryable, replayable format"
+          ]
+        },
+        {
+          "question": "How do you measure task-level success?",
+          "answer": "Define completion criteria before running the agent — not after reading the output. Tier 1 measures decision quality: tool selection accuracy, context adherence, factual correctness. Tier 2 measures behaviour quality: goal achievement rate, efficiency, instruction adherence. Tier 3 measures safety: injection detection, PII exposure, intent preservation. A fluent non-answer is a Tier 2 failure.",
+          "items": [
+            "Write measurable criteria for each task type before building",
+            "Evaluate tool accuracy and goal achievement separately from response quality",
+            "Build regression suites around task scenarios, not prompt-response pairs",
+            "Track all three tiers as a bundle — not in isolation"
+          ]
+        },
+        {
+          "question": "How do you compare architectural changes?",
+          "answer": "Model swaps, prompt restructures, retrieval changes, and orchestration modifications produce non-linear effects on task outcomes. Without a stable baseline harness, improvement is guesswork. Maintain a canonical evaluation harness per agent type. Version harness inputs and criteria alongside application code.",
+          "items": [
+            "Version harness inputs and scoring criteria with application code",
+            "Report goal achievement, error rate, latency, and cost as a bundle",
+            "Run baseline comparisons on any model swap or prompt restructure",
+            "Treat the evaluation harness as a first-class product artefact"
+          ]
+        }
+      ]
     }
   ]
 }

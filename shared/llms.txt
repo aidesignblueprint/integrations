@@ -1,11 +1,13 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-04-13T13:21:09+01:00
-Source commit: 3c8f0010a0cb4bf3bbc5304e77a0aceed9bdc227
-Content version: 3c8f0010a0cb
+Generated at: 2026-04-16T20:05:16+01:00
+Source commit: b64819a0830c61ae54ca894de93ce4cbd5e135b9
+Content version: b64819a0830c
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
+- https://aidesignblueprint.com/en/security-application
+- https://aidesignblueprint.com/en/observable-evaluation
 - https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.json
 - https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.md
 - https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc
