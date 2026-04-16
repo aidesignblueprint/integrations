@@ -29,3 +29,6 @@ Use this doctrine when implementing or reviewing AI-native systems.
 - `search_principles(query, limit?)`
 - `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
 - `list_agent_assets()`
+- `list_application_guides()`
+- `get_application_guide(slug)`
+- `search_application_guides(query, limit?)`
