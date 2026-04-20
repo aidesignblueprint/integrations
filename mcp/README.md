@@ -11,6 +11,19 @@ Use the public read-only MCP endpoint:
 }
 ```
 
+Codex can register the same endpoint through the CLI:
+
+```bash
+codex mcp add aidesignblueprint --url https://aidesignblueprint.com/mcp
+```
+
+Or through `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.aidesignblueprint]
+url = "https://aidesignblueprint.com/mcp"
+```
+
 ## Expected initialize payload
 
 ```json

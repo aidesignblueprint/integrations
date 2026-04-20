@@ -19,3 +19,6 @@ For local or open-weight runtimes, start with static prompt packs and only add H
 - `search_principles(query, limit?)`
 - `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
 - `list_agent_assets()`
+- `list_application_guides()`
+- `get_application_guide(slug)`
+- `search_application_guides(query, limit?)`

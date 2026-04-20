@@ -9,7 +9,7 @@ The public integration contract is:
 
 ## What is public today
 
-Public read-only MCP tools:
+Public retrieval MCP tools:
 
 - `list_principles`
 - `list_clusters`
@@ -19,6 +19,14 @@ Public read-only MCP tools:
 - `search_principles`
 - `search_examples`
 - `list_agent_assets`
+- `list_application_guides`
+- `get_application_guide`
+- `search_application_guides`
+
+Public signal MCP tools:
+
+- `report_value_event`
+- `submit_feedback`
 
 ## What is not public yet
 

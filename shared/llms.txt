@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-04-16T20:05:16+01:00
-Source commit: b64819a0830c61ae54ca894de93ce4cbd5e135b9
-Content version: b64819a0830c
+Generated at: 2026-04-20T11:24:11+01:00
+Source commit: 77fc8cbbb9044a6850efd03a2d554e065683dafa
+Content version: 77fc8cbbb904
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
@@ -13,6 +13,7 @@ Primary entrypoints:
 - https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc
 - https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip
 - https://aidesignblueprint.com/agent-assets/agent-kickoff-prompts.md
+- https://aidesignblueprint.com/agent-assets/codex.config.toml
 - https://aidesignblueprint.com/agent-assets/AGENTS.md
 - https://aidesignblueprint.com/agent-assets/blueprint-core.md
 - https://aidesignblueprint.com/agent-assets/copilot-instructions.md
@@ -24,6 +25,7 @@ Primary entrypoints:
 
 Setup docs:
 - https://aidesignblueprint.com/agent-assets/setup-claude-code.md
+- https://aidesignblueprint.com/agent-assets/setup-codex.md
 - https://aidesignblueprint.com/agent-assets/setup-cursor.md
 - https://aidesignblueprint.com/agent-assets/setup-windsurf.md
 - https://aidesignblueprint.com/agent-assets/setup-github-copilot.md

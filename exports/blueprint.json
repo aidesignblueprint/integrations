@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-16T20:05:16+01:00",
-  "source_commit": "b64819a0830c61ae54ca894de93ce4cbd5e135b9",
-  "content_version": "b64819a0830c",
+  "generated_at": "2026-04-20T11:24:11+01:00",
+  "source_commit": "77fc8cbbb9044a6850efd03a2d554e065683dafa",
+  "content_version": "77fc8cbbb904",
   "title": "AI Design Principle Blueprint",
   "purpose": "This document defines the core design principles for AI-enabled products and services in which the system does more than respond to user inputs. It interprets intent, performs actions, coordinates processes, and completes work on the user’s behalf.\n\nConventional digital experiences were designed around direct interaction. In that model, the user remains the primary operator throughout the journey, progressing step by step through a sequence of actions.\n\nAI systems, particularly agentic systems, introduce a materially different model. In these environments, the user is no longer solely the operator of the interface. Instead, the user increasingly assumes the role of supervisor, director, or decision-maker, while the system undertakes execution.\n\nThis blueprint establishes the design principles required to support that transition responsibly and coherently.",
   "strategic_premise": "Traditional interaction design rests on several assumptions:\n\n* the user is continuously present\n* the user performs each material step directly\n* the user requires visibility of each stage of the process\n* the interface is the principal site of value creation\n\nThese assumptions weaken when AI systems are capable of acting independently, operating asynchronously, and coordinating work across tools, data sources, or multiple agents.\n\nIn an agentic context, the product experience is no longer defined solely by the visible interface. It is defined by the relationship between:\n\n* user intent\n* delegated authority\n* system execution\n* visibility and accountability\n* human intervention when required\n* review and acceptance of outcomes\n\nThe central design question therefore changes.\n\nIt is no longer only: **How does the user complete the task?**\n\nIt becomes: **How does the user delegate the task safely, remain appropriately informed, and intervene only when necessary?**",
@@ -3147,6 +3147,127 @@
             "Report goal achievement, error rate, latency, and cost as a bundle",
             "Run baseline comparisons on any model swap or prompt restructure",
             "Treat the evaluation harness as a first-class product artefact"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "beyond-human-in-the-loop",
+      "title": "AI Design Blueprint — Beyond human-in-the-loop",
+      "summary": "How Principles 1 (delegation), 8 (explicit approvals), 9 (system representation), and 10 (steering) compose into a governance architecture for high-stakes agentic systems — replacing nominal human-in-the-loop approval with structured intervention points, escalation tiers, and operator override.",
+      "principle_ids": [
+        1,
+        8,
+        9,
+        10
+      ],
+      "sections": [
+        {
+          "question": "What makes human-in-the-loop insufficient?",
+          "answer": "HITL becomes insufficient when the human only appears at the boundary of execution. If the system has already acted — written to a database, sent a message, reserved a resource — the approval gate is decorative. The human is ratifying a fait accompli, not exercising control. The Blueprint's position is that governance must be embedded in the structure of the workflow, not appended to its end.",
+          "items": [
+            "Approval only at task completion does not prevent harm during execution",
+            "A single gate cannot govern workflows with branching or concurrent steps",
+            "Humans cannot make informed decisions on invisible intermediate state",
+            "Symbolic approval without a defined recovery capability is not a control model"
+          ]
+        },
+        {
+          "question": "What are the four structural failure modes of HITL?",
+          "answer": "Late approval: confirmation arrives after consequential decisions are already executed. Opaque intermediate state: the approver cannot see what the system did to reach this point. Missing intervention points: there is no mechanism to redirect or pause mid-execution. Undefined recovery: approving a bad decision has no specified rollback path. Any one of these alone is a governance gap. Together they represent a systemic liability.",
+          "items": [
+            "Late approval — the moment of confirmation is not the moment of consequence",
+            "Opaque state — the approval surface hides what the system has already done",
+            "No steering — the only available control is restart, not redirect",
+            "No rollback — a wrong approval has no defined recovery sequence"
+          ]
+        },
+        {
+          "question": "What does the Blueprint prescribe in place of HITL?",
+          "answer": "Four principles compose the replacement model. Principle 1 defines the delegation contract: scope, permitted actions, and termination conditions are explicit before work begins. Principle 8 surfaces every hand-off, approval gate, and blocker as a visible, actionable event during execution. Principle 9 represents the workflow as a structured system — with dependencies, concurrent state, and progression visible — not as a conversation log. Principle 10 builds steering capability so the operator can redirect, pause, or halt work at any point without restarting from zero.",
+          "items": [
+            "Define the delegation contract before initiation — scope, constraints, permitted actions",
+            "Surface every approval gate and blocker as a visible, actionable event",
+            "Represent the workflow as a structured system, not a conversation transcript",
+            "Support intervention at any point — redirect, pause, escalate, or terminate"
+          ]
+        },
+        {
+          "question": "What are escalation tiers and operator override?",
+          "answer": "Escalation tiers define which conditions the system resolves autonomously, which require operator confirmation, and which require human authority to proceed. Operator override is the mechanism by which a human interrupts a running workflow, inspects its current state, applies a constraint, and resumes or terminates. Both must be designed explicitly — a system that does not define its escalation model has an implicit one that nobody controls.",
+          "items": [
+            "Define autonomous, confirmable, and authority-required decision classes before deployment",
+            "Make escalation conditions observable — the system must signal when it is escalating",
+            "Operator override must work at any step, not only at designed gate points",
+            "Recovery sequences must be specified for every escalation tier"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "webmcp-action-surfaces-approval-boundaries",
+      "title": "WebMCP Action Surfaces and Safe Agent Transactions",
+      "summary": "Design public website actions for agents as explicit, inspectable, approval-bound transactions instead of hidden browser automation.",
+      "principle_ids": [
+        1,
+        5,
+        8,
+        10
+      ],
+      "sections": [
+        {
+          "question": "Why does the standard approach fail for agent actions on public websites?",
+          "answer": "The standard approach fails because it was built for direct manipulation by an attentive human, not for delegated execution by an agent operating across multiple steps and periods of low user attention. DOM scraping, click replay, and screenshot interpretation hide intent, blur responsibility, and make approvals feel accidental instead of designed.",
+          "items": [
+            "A button click in a human UI often bundles validation, side effects, and commitment into one opaque moment, which gives agents no clean boundary for safe delegation.",
+            "Browser automation depends on page structure and visual cues, so the system knows how to imitate actions but not how to explain them in user-relevant terms.",
+            "When work continues in the background, traditional pages provide weak signals about whether the agent is searching, waiting, blocked, or ready for approval.",
+            "Users cannot easily inspect how a result was produced, which undermines trust when money, identity, bookings, or submissions are involved.",
+            "Correction usually happens too late because the flow is optimized for starting a task, not for steering it while it unfolds."
+          ]
+        },
+        {
+          "question": "What structural failure modes should teams expect when exposing WebMCP tools?",
+          "answer": "The main failure modes come from exposing capability without exposing operational structure. If a site publishes tools but does not define state, approvals, blockers, and review points, the agent can technically act while the user cannot meaningfully govern the work.",
+          "items": [
+            "Over-broad tools combine discovery, selection, and commitment in one call, making it unclear when the system is merely preparing versus actually transacting.",
+            "Implicit approvals occur when saved preferences, session state, or default payment details let the agent cross a commitment boundary without a distinct confirmation step.",
+            "Silent blockers appear when inventory changes, identity checks, policy rules, or third-party dependencies stop progress but are only visible as generic errors.",
+            "Uninspectable outputs return a result without enough evidence, provenance, or rationale for the user to judge whether it should be accepted.",
+            "Conversation-only representations flatten multi-step work into chat updates, hiding dependencies, retries, and pending decisions that should be shown as structured state."
+          ]
+        },
+        {
+          "question": "What is the Blueprint replacement model for WebMCP action surfaces?",
+          "answer": "The replacement model is to design agent-facing website capabilities as explicit transactional surfaces. Each surface should separate intent capture, background preparation, reviewable output, and commitment. The user delegates the work, the system keeps progress perceptible, and approvals are reserved for moments where authority, risk, or irreversibility actually change.",
+          "items": [
+            "Define tools around user intent such as search, quote, reserve, draft, or prepare checkout, rather than around low-level UI actions like click, open, or submit form.",
+            "Expose meaningful states such as preparing options, awaiting identity check, price changed, ready for approval, completed, or failed with action required.",
+            "Use progressive disclosure so the default view shows status and consequence, while deeper inspection reveals inputs used, tool calls made, and evidence gathered.",
+            "Make approval boundaries explicit by separating reversible preparation from irreversible commitment such as purchase, booking, publication, or legal submission.",
+            "Support steering during execution with controls to refine constraints, swap options, reprioritize tasks, pause work, or escalate to a human channel."
+          ]
+        },
+        {
+          "question": "How should teams implement approval boundaries and safe transactions in practice?",
+          "answer": "Implementation should start by mapping every agent-callable action to a risk tier and a corresponding approval pattern. The goal is not to block all automation, but to ensure that the level of autonomy matches the consequence of the action and the user’s ability to inspect or intervene.",
+          "items": [
+            "Tier 1 low-risk actions like search, availability checks, glossary lookup, or quote generation can run without approval but should still expose status and source context.",
+            "Tier 2 medium-risk actions like cart assembly, reservation holds, draft applications, or account changes should require review before commitment and show expiry, assumptions, and dependencies.",
+            "Tier 3 high-risk actions like payment, final booking, regulated submission, or identity-linked changes should require explicit approval tied to the exact transaction summary.",
+            "Every approval screen should state what will happen, what cannot be undone, what data will be used, and what changed since the agent began the task.",
+            "When the system is blocked, return a user-actionable reason such as re-authenticate, confirm age, accept updated price, or choose a replacement item instead of a generic failure."
+          ]
+        },
+        {
+          "question": "When should a team escalate from basic tool exposure to a fuller agent transaction system?",
+          "answer": "Teams should escalate when delegated work becomes multi-step, asynchronous, or consequential enough that a simple tool list no longer gives users adequate control. At that point, the design problem is not tool access alone but orchestration, review, and governance across a visible work system.",
+          "items": [
+            "Stay basic when tools are read-only, immediate, and easily reversible, such as content retrieval or simple product discovery.",
+            "Add structured job state when tasks can take time, depend on external systems, or produce intermediate outputs that users may need to review.",
+            "Add approval queues and audit views when multiple transactions may be prepared in parallel or when a user must compare and approve among alternatives.",
+            "Add organization-level controls when delegated actions involve teams, shared budgets, policy constraints, or role-based authority.",
+            "Escalate to full inspectability when trust, compliance, or dispute resolution depends on showing how the agent reached a recommendation or prepared a transaction."
           ]
         }
       ]
