@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.aidesignblueprint/doctrine",
+  "title": "AI Design Blueprint Doctrine",
+  "description": "Doctrine and examples for the Agentic AI Blueprint. 13 public tools, no credentials required.",
+  "version": "1.0.0",
+  "homepage": "https://aidesignblueprint.com",
+  "license": "MIT",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "aidesignblueprint-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "streamable-http",
+        "url": "https://aidesignblueprint.com/mcp"
+      }
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://aidesignblueprint.com/mcp"
+    }
+  ]
+}
