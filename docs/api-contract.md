@@ -11,22 +11,22 @@ The public integration contract is:
 
 Public retrieval MCP tools:
 
-- `list_principles`
-- `list_clusters`
-- `get_principle`
-- `get_cluster`
-- `get_example`
-- `search_principles`
-- `search_examples`
-- `list_agent_assets`
-- `list_application_guides`
-- `get_application_guide`
-- `search_application_guides`
+- `principles.list`
+- `clusters.list`
+- `principles.get`
+- `clusters.get`
+- `examples.get`
+- `principles.search`
+- `examples.search`
+- `assets.list`
+- `guides.list`
+- `guides.get`
+- `guides.search`
 
 Public signal MCP tools:
 
-- `report_value_event`
-- `submit_feedback`
+- `signals.report`
+- `signals.feedback`
 
 ## What is not public yet
 

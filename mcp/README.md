@@ -44,7 +44,7 @@ url = "https://aidesignblueprint.com/mcp"
 
 ## First proof calls
 
-1. `list_clusters()`
-2. `search_examples(query="orchestration visibility steering", limit=3)`
+1. `clusters.list()`
+2. `examples.search(query="orchestration visibility steering", limit=3)`
 
 The public MCP tier is intended for doctrine retrieval and implementation discovery.

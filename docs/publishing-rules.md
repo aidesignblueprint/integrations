@@ -47,5 +47,5 @@ Before publishing:
 1. verify the live public endpoint descriptor at `/mcp`
 2. verify the setup files still point to the canonical public URLs
 3. verify the first proof calls still work:
-   - `list_clusters()`
-   - `search_examples(query="orchestration visibility steering", limit=3)`
+   - `clusters.list()`
+   - `examples.search(query="orchestration visibility steering", limit=3)`
