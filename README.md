@@ -1,5 +1,7 @@
 # AI Design Blueprint Integrations
 
+[![integrations MCP server](https://glama.ai/mcp/servers/aidesignblueprint/integrations/badges/score.svg)](https://glama.ai/mcp/servers/aidesignblueprint/integrations)
+
 Official integrations and installable doctrine for AI Design Blueprint across MCP, IDE rules, prompt files, and agent runtimes.
 
 ## What is in this repo
