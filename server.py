@@ -16,11 +16,22 @@ async def run() -> None:
     async with streamablehttp_client(REMOTE_URL) as (r, w, _):
         async with ClientSession(r, w) as client:
             await client.initialize()
-            tools = (await client.list_tools()).tools
+            remote_tools = (await client.list_tools()).tools
 
             @app.list_tools()
             async def _list_tools() -> list[types.Tool]:
-                return tools
+                # Strip outputSchema: this proxy returns text content only.
+                # Advertising outputSchema without returning structuredContent
+                # causes MCP Inspector validation errors.
+                return [
+                    types.Tool(
+                        name=t.name,
+                        description=t.description,
+                        inputSchema=t.inputSchema,
+                        annotations=getattr(t, "annotations", None),
+                    )
+                    for t in remote_tools
+                ]
 
             @app.call_tool()
             async def _call_tool(
