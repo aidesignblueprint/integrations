@@ -17,26 +17,26 @@ Use this matrix to pick the smallest truthful setup for each tool or runtime.
 
 ## Public retrieval MCP tools
 
-- `list_principles(cluster?)`
-- `list_clusters()`
-- `get_principle(slug)`
-- `get_cluster(slug)`
-- `get_example(slug)`
-- `search_principles(query, limit?)`
-- `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
-- `list_agent_assets()`
-- `list_application_guides()`
-- `get_application_guide(slug)`
-- `search_application_guides(query, limit?)`
+- `principles.list(cluster?)`
+- `clusters.list()`
+- `principles.get(slug)`
+- `clusters.get(slug)`
+- `examples.get(slug)`
+- `principles.search(query, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `assets.list()`
+- `guides.list()`
+- `guides.get(slug)`
+- `guides.search(query, limit?)`
 
 ## Public signal MCP tools (write, opt-in)
 
-- `report_value_event(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
-- `submit_feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
+- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
+- `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
 ## Protected tools not part of the anonymous setup path
 
-- `get_my_learning_path()`
-- `get_my_coaching_context()`
-- `validate_agent_architecture(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
-- `add_evidence_note(course_slug, stage_id, note)`
+- `me.learning_path()`
+- `me.coaching_context()`
+- `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `me.add_evidence(course_slug, stage_id, note)`

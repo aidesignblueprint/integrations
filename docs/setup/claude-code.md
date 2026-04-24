@@ -6,7 +6,7 @@ Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill 
 
 1. Download `claude-skill-pack.zip` and install it into your Claude skills directory.
 2. Add the MCP server config below to the Claude MCP config file you already use.
-3. Verify the connection with `list_clusters()` after initialize succeeds.
+3. Verify the connection with `clusters.list()` after initialize succeeds.
 4. Keep `agent-kickoff-prompts.md` nearby for first-turn audit and retrieval prompts.
 
 ## Copy block
@@ -22,21 +22,21 @@ Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill 
 
 ## Public read-only MCP tools
 
-- `list_principles(cluster?)`
-- `list_clusters()`
-- `get_principle(slug)`
-- `get_cluster(slug)`
-- `get_example(slug)`
-- `search_principles(query, limit?)`
-- `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
-- `list_agent_assets()`
-- `list_application_guides()`
-- `get_application_guide(slug)`
-- `search_application_guides(query, limit?)`
+- `principles.list(cluster?)`
+- `clusters.list()`
+- `principles.get(slug)`
+- `clusters.get(slug)`
+- `examples.get(slug)`
+- `principles.search(query, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `assets.list()`
+- `guides.list()`
+- `guides.get(slug)`
+- `guides.search(query, limit?)`
 
 ## First proof call
 
 1. Start a session with the MCP server connected.
-2. Call `list_clusters()`.
-3. Then call `search_examples(query="orchestration visibility steering", limit=3)`.
+2. Call `clusters.list()`.
+3. Then call `examples.search(query="orchestration visibility steering", limit=3)`.
 4. Only use protected tools after authenticated setup exists.

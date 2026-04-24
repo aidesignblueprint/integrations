@@ -20,21 +20,21 @@ Use AI Design Blueprint doctrine whenever working on AI-native features, agentic
 
 ## Public retrieval MCP tools
 
-- `list_principles(cluster?)`
-- `list_clusters()`
-- `get_principle(slug)`
-- `get_cluster(slug)`
-- `get_example(slug)`
-- `search_principles(query, limit?)`
-- `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
-- `list_agent_assets()`
-- `list_application_guides()`
-- `get_application_guide(slug)`
-- `search_application_guides(query, limit?)`
+- `principles.list(cluster?)`
+- `clusters.list()`
+- `principles.get(slug)`
+- `clusters.get(slug)`
+- `examples.get(slug)`
+- `principles.search(query, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `assets.list()`
+- `guides.list()`
+- `guides.get(slug)`
+- `guides.search(query, limit?)`
 
 ## Public signal MCP tools (opt-in, anonymous-allowed)
 
-- `report_value_event(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
-- `submit_feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
+- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
+- `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
 Only call signal tools after explicit user confirmation. Never call silently.

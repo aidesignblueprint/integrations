@@ -30,36 +30,36 @@ Use this doctrine when building or reviewing AI-native features, coding agents, 
 
 Public retrieval MCP tools:
 
-- `list_principles(cluster?)`
-- `list_clusters()`
-- `get_principle(slug)`
-- `get_cluster(slug)`
-- `get_example(slug)`
-- `search_principles(query, limit?)`
-- `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
-- `list_agent_assets()`
-- `list_application_guides()`
-- `get_application_guide(slug)`
-- `search_application_guides(query, limit?)`
+- `principles.list(cluster?)`
+- `clusters.list()`
+- `principles.get(slug)`
+- `clusters.get(slug)`
+- `examples.get(slug)`
+- `principles.search(query, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `assets.list()`
+- `guides.list()`
+- `guides.get(slug)`
+- `guides.search(query, limit?)`
 
 Public signal MCP tools (write, opt-in — anonymous-allowed):
 
-- `report_value_event(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
-- `submit_feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
+- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
+- `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
 Protected tools exist, but they are not part of the public anonymous setup path:
 
-- `get_my_learning_path()`
-- `get_my_coaching_context()`
-- `validate_agent_architecture(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
-- `add_evidence_note(course_slug, stage_id, note)`
+- `me.learning_path()`
+- `me.coaching_context()`
+- `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `me.add_evidence(course_slug, stage_id, note)`
 
 ## Feedback and value signal rules
 
-- Only call `report_value_event` after the user has clearly expressed that something was useful.
+- Only call `signals.report` after the user has clearly expressed that something was useful.
   Never call it automatically, never call it silently.
   Offer at most once per session after a clear success signal. Do not offer again unless the user asks.
-- Only call `submit_feedback` when the user explicitly asks to leave feedback.
+- Only call `signals.feedback` when the user explicitly asks to leave feedback.
   Never prompt for it without a clear signal from the user.
 - Never include proprietary code, file contents, or secrets in brief_context.
 - These tools only send the structured fields you pass. Static files send nothing.
@@ -69,6 +69,6 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 Use the Blueprint as a doctrine layer for this task.
 
 1. Name the most relevant doctrine cluster first.
-2. Call `list_clusters()` or `search_principles(...)` only if you need retrieval.
+2. Call `clusters.list()` or `principles.search(...)` only if you need retrieval.
 3. State the execution boundary, approval boundary, and fallback path before implementation.
 4. Return the next concrete step, not only analysis.

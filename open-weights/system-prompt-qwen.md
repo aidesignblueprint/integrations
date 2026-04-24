@@ -21,14 +21,14 @@ Use this doctrine when implementing or reviewing AI-native systems.
 
 ## Public MCP tools worth using
 
-- `list_principles(cluster?)`
-- `list_clusters()`
-- `get_principle(slug)`
-- `get_cluster(slug)`
-- `get_example(slug)`
-- `search_principles(query, limit?)`
-- `search_examples(query, principle_ids?, difficulty?, library?, limit?)`
-- `list_agent_assets()`
-- `list_application_guides()`
-- `get_application_guide(slug)`
-- `search_application_guides(query, limit?)`
+- `principles.list(cluster?)`
+- `clusters.list()`
+- `principles.get(slug)`
+- `clusters.get(slug)`
+- `examples.get(slug)`
+- `principles.search(query, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `assets.list()`
+- `guides.list()`
+- `guides.get(slug)`
+- `guides.search(query, limit?)`
