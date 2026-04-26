@@ -90,6 +90,16 @@ coach during their own workflows — governance runs automatically, without huma
 - **Pro**: Human submits code, `architect.validate` returns violations
 - **Teams** _(coming soon)_: Production agents call Blueprint coach as an A2A peer
 
+## Governance badge
+
+This agent was built using AI Design Blueprint doctrine. Add the free badge to your own governed repo:
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
+```
+
+Pro users can run `architect.validate()` via the MCP and get a score-linked badge that shows `Governed · X/Y` or `Reviewed · X/Y` with a public readiness review page.
+
 ## Resources
 
 - [AI Design Blueprint](https://aidesignblueprint.com)

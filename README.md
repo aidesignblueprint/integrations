@@ -68,6 +68,24 @@ Signal tools write only the structured fields you pass. No prompts, no code, no 
 - Only call `signals.feedback` when the user explicitly asks to leave feedback. Never prompt for it proactively.
 - Never include proprietary code, file contents, or secrets in `brief_context`.
 
+## Governance badges
+
+Show that your agent or repo follows the Blueprint doctrine.
+
+**Free badge** — paste into your `README.md` (no account required):
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
+```
+
+**Pro badge** — run `architect.validate()` via the MCP. The response includes `run_id`, `badge_url`, and `review_url`:
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+```
+
+The Pro badge displays your tier (`Governed · X/Y` or `Reviewed · X/Y`) and links to a public readiness review page. Requires a Pro or Beta account.
+
 ## What is intentionally not here yet
 
 - no public OpenAPI schema
