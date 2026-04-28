@@ -72,3 +72,21 @@ Use the Blueprint as a doctrine layer for this task.
 2. Call `clusters.list()` or `principles.search(...)` only if you need retrieval.
 3. State the execution boundary, approval boundary, and fallback path before implementation.
 4. Return the next concrete step, not only analysis.
+
+## Showcase your governance
+
+Let your users know this agent was built using safe, governed architectures.
+
+**Free badge** — add this to your `README.md` (no account required):
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
+```
+
+**Pro badge** — run `architect.validate()` via the MCP tool. Each run returns a `run_id` and a unique badge URL tied to your score:
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+```
+
+The Pro badge shows your tier (Governed / Reviewed) and principle score. The link opens a public readiness review page anyone can verify.

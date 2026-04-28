@@ -40,3 +40,22 @@ Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill 
 2. Call `clusters.list()`.
 3. Then call `examples.search(query="orchestration visibility steering", limit=3)`.
 4. Only use protected tools after authenticated setup exists.
+
+## Governance badges
+
+Show that your agent or repo follows the Blueprint doctrine.
+
+**Free badge** — paste into your `README.md` (no account required):
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
+```
+
+**Pro badge** — run `architect.validate()` with your architecture description.
+The response includes `run_id`, `badge_url`, and `review_url`. Replace `<run_id>` with the value returned:
+
+```markdown
+[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+```
+
+The Pro badge displays your tier (Governed · X/Y or Reviewed · X/Y) and links to a public readiness review page anyone can inspect. Requires a Pro or Beta account.
