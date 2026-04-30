@@ -6,12 +6,12 @@ Use this matrix to pick the smallest truthful setup for each tool or runtime.
 | --- | --- | --- | --- | --- |
 | Claude Code | `claude-skill-pack.zip + claude-code.mcp.json` | `agent-kickoff-prompts.md` | MCP + skill + local prompt pack | Live now |
 | Codex | `codex-skill-pack.zip + codex.config.toml` | `agentic-design-blueprint.json` | MCP + skill (.agents/skills/) + local exports | Live now |
-| Cursor | `agentic-design-principles.mdc` | `llms.txt` | MCP optional, .mdc first | Live now |
+| Cursor | `cursor-rule-pack.zip` | `agentic-design-principles.mdc` | Rule pack (rules + MCP config), MCP optional | Live now |
 | Windsurf | `blueprint-core.md` | `AGENTS.md` | MCP optional, workspace rule first | Live now |
 | GitHub Copilot | `copilot-instructions.md` | `AGENTS.md` | MCP optional, repo instructions first | Live now |
-| Gemini CLI | `GEMINI.md` | `llms.txt` | MCP optional, project context first | Live now |
+| Gemini CLI | `gemini-skill-pack.zip + GEMINI.md` | `llms.txt` | Skill (.agents/skills/) + GEMINI.md + MCP optional | Live now |
 | DeepSeek | `system-prompt-deepseek.md` | `llms.txt` | Static prompt pack | Live now |
-| Qwen | `system-prompt-qwen.md` | `llms.txt` | Static prompt pack | Live now |
+| Qwen Code | `qwen-skill-pack.zip + system-prompt-qwen.md` | `agentic-design-blueprint.json` | Skill (.qwen/skills/) + MCP optional | Live now |
 | OpenAI / GPT actions | `setup-openai-actions.md` | `agentic-design-blueprint.json` | OpenAPI deferred until public schema routes exist | Deferred |
 | Continue / Cline / RooCode / Aider | `AGENTS.md` | `llms.txt` | Shared-file path first | Next phase |
 

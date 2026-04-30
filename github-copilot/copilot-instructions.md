@@ -18,6 +18,16 @@ Use AI Design Blueprint doctrine whenever working on AI-native features, agentic
 - Add `AGENTS.md` if you also want the same doctrine available to other repo-aware tools.
 - Use the MCP endpoint as an optional live lookup layer, not as the only integration path.
 
+## MCP support notes
+
+Copilot coding agent supports MCP **tools** only — resources and prompts are not supported.
+Remote MCP servers require OAuth authentication; the Blueprint public endpoint is anonymous read-only and does not require OAuth.
+Add the Blueprint server under `.github/copilot/mcp.json` (repo-level) or user settings → MCP (personal). Example:
+
+```json
+{"mcpServers": {"aidesignblueprint": {"type": "http", "url": "https://aidesignblueprint.com/mcp"}}}
+```
+
 ## Public retrieval MCP tools
 
 - `principles.list(cluster?)`

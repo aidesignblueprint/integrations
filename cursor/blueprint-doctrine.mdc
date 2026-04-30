@@ -1,7 +1,8 @@
 ---
-description: Agentic Design Blueprint doctrine rules
-source_commit: d67d0590581505abeebb2e263c3c24ef0c5a08b1
-content_version: d67d05905815
+description: Use when designing, reviewing, or implementing agentic AI workflows, tool use, approvals, orchestration, background work, trust surfaces, MCP integrations, or human-in-the-loop systems.
+alwaysApply: false
+source_commit: 9af52e1535a534946167dc8902466d84ec838a28
+content_version: 9af52e1535a5
 ---
 
 # Agentic Design Blueprint

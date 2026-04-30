@@ -1,3 +1,8 @@
+---
+trigger: model_decision
+description: Use when designing, reviewing, or implementing agentic AI workflows, tool use, approvals, orchestration, background work, trust surfaces, or human-in-the-loop systems.
+---
+
 # AI Design Blueprint — Windsurf Rule
 
 Apply this rule to AI features, agents, copilots, and workflow automations.
@@ -17,7 +22,19 @@ Apply this rule to AI features, agents, copilots, and workflow automations.
 
 - Save this file as `.windsurf/rules/blueprint-core.md`.
 - Optionally add `AGENTS.md` at repo root if you want the same doctrine readable by other tools.
-- Use the public MCP endpoint only when you want live retrieval during a session.
+- To connect the MCP endpoint, add the snippet below to `~/.codeium/windsurf/mcp_config.json` (global) or `.windsurf/mcp.json` (project-local).
+
+## MCP config
+
+```json
+{
+  "mcpServers": {
+    "aidesignblueprint": {
+      "serverUrl": "https://aidesignblueprint.com/mcp"
+    }
+  }
+}
+```
 
 ## Public retrieval MCP tools
 
