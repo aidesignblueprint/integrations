@@ -5,7 +5,7 @@ Use this matrix to pick the smallest truthful setup for each tool or runtime.
 | Tool | Primary asset | Optional companion | Retrieval path | Status |
 | --- | --- | --- | --- | --- |
 | Claude Code | `claude-skill-pack.zip + claude-code.mcp.json` | `agent-kickoff-prompts.md` | MCP + skill + local prompt pack | Live now |
-| Codex | `codex.config.toml + agentic-design-blueprint.json` | `agentic-design-blueprint.md` | Codex CLI or config.toml + local exports | Live now |
+| Codex | `codex-skill-pack.zip + codex.config.toml` | `agentic-design-blueprint.json` | MCP + skill (.agents/skills/) + local exports | Live now |
 | Cursor | `agentic-design-principles.mdc` | `llms.txt` | MCP optional, .mdc first | Live now |
 | Windsurf | `blueprint-core.md` | `AGENTS.md` | MCP optional, workspace rule first | Live now |
 | GitHub Copilot | `copilot-instructions.md` | `AGENTS.md` | MCP optional, repo instructions first | Live now |
