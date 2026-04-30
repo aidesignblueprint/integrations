@@ -51,8 +51,12 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 
 - `me.learning_path()`
 - `me.coaching_context()`
-- `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
 - `me.add_evidence(course_slug, stage_id, note)`
+- `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `team.summarize(days_back?)`
+- `handoffs.operator(...)`
+- `handoffs.partnership(...)`
+- `handoffs.agency(...)`
 
 ## Feedback and value signal rules
 
