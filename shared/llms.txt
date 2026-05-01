@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-05-01T11:24:14+01:00
-Source commit: d775bfe054fbc6fd50282a4be8828269022e35fa
-Content version: d775bfe054fb
+Generated at: 2026-05-01T18:10:57+01:00
+Source commit: 0e9028f63d62e0cbbf803be7dc9e4a483605d21e
+Content version: 0e9028f63d62
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
@@ -39,3 +39,13 @@ Setup docs:
 
 MCP:
 - https://aidesignblueprint.com/mcp
+
+# Enterprise Trust & Security
+
+AI Design Blueprint is designed for enterprise and proprietary codebases.
+
+- PUBLIC TOOLS (Read-Only): The 13 public MCP tools are stateless reference APIs. They do NOT ingest, read, or store any of your codebase, prompts, or proprietary data. Safe for any company environment.
+- AUTHENTICATED TOOLS (Pro/Teams): Tools like architect.validate process payloads transiently in memory. Zero-training policy: we do not train models on user code, validation payloads, or architecture diagrams.
+- PRIVATE SESSION: Pass private_session=true to architect.validate or team.summarize to bypass all server-side database logging — enforced in code at the MCP server layer, not just in policy.
+- COMPLIANCE: UK GDPR and EU GDPR compliant. Data residency: Google Cloud Run europe-west2 (London, UK). Data Processing Agreements (DPAs) available on the Teams plan on request.
+- TRUST PAGE: https://aidesignblueprint.com/en/for-agents/trust-and-data-handling
