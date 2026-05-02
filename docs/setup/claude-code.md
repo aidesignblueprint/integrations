@@ -54,10 +54,18 @@ Show that your agent or repo follows the Blueprint doctrine.
 ```
 
 **Pro badge** — run `architect.validate()` with your architecture description.
-The response includes `run_id`, `badge_url`, and `review_url`. Replace `<run_id>` with the value returned:
+The response includes `run_id`, `badge_url`, and `review_url`. Two embeddable variants are available — replace `<run_id>` with the value returned:
+
+Small flat badge:
 
 ```markdown
-[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+[![Blueprint Readiness Score](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
 ```
 
-The Pro badge displays your tier (Governed · X/Y or Reviewed · X/Y) and links to a public readiness review page anyone can inspect. Requires a Pro or Beta account.
+Score card (Glama-style panel — score, grade, tier, repository):
+
+```markdown
+[![Blueprint Readiness Score card](https://aidesignblueprint.com/api/badge/run/<run_id>/card.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+```
+
+The flat badge shows the Blueprint Readiness Score on one line; the score card is a richer panel with the 0–100 score, A–F grade, tier (Production-ready / Emerging / Draft), and the repository scored. Both link to a public readiness review page anyone can inspect. Requires a Pro or Beta account.

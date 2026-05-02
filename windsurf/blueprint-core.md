@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-- Generated at: 2026-05-01T18:10:57+01:00
-- Source commit: 0e9028f63d62e0cbbf803be7dc9e4a483605d21e
-- Content version: 0e9028f63d62
+- Generated at: 2026-05-02T13:06:03+01:00
+- Source commit: a08d5d138e398273a9147c9d9487f3b5561ba330
+- Content version: a08d5d138e39
 
 ## Summary
 

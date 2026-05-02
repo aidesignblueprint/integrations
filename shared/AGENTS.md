@@ -99,10 +99,18 @@ Let your users know this agent was built using safe, governed architectures.
 [![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
 ```
 
-**Pro badge** — run `architect.validate()` via the MCP tool. Each run returns a `run_id` and a unique badge URL tied to your score:
+**Pro badge** — run `architect.validate()` via the MCP tool. Each run returns a `run_id` and two embeddable variants tied to your score:
+
+Small flat badge (shields-style):
 
 ```markdown
-[![AI Design Blueprint](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+[![Blueprint Readiness Score](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
 ```
 
-The Pro badge shows your tier (Governed / Reviewed) and principle score. The link opens a public readiness review page anyone can verify.
+Score card (Glama-style panel — Blueprint Readiness Score + grade + tier):
+
+```markdown
+[![Blueprint Readiness Score card](https://aidesignblueprint.com/api/badge/run/<run_id>/card.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
+```
+
+The flat badge is one line — drop it next to other shields at the top of your README. The score card is a richer panel showing the 0–100 score, A–F grade, tier (Production-ready / Emerging / Draft), and the repository the run was scored against — pin it above the fold for the strongest signal. Both link to a public readiness review page anyone can verify.
