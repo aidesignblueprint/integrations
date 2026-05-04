@@ -66,6 +66,7 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 - `me.add_evidence(course_slug, stage_id, note)`
 - `me.validation_history(repository?, run_id?, limit?)`
 - `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `architect.certify(run_id, code)`
 - `team.summarize(days_back?)`
 - `handoffs.operator(...)`
 - `handoffs.partnership(...)`
