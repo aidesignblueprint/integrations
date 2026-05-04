@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-05-04T12:46:59+01:00
-Source commit: 499e64142d1061bea0cd84e87827fea03bd41325
-Content version: 499e64142d10
+Generated at: 2026-05-04T14:27:12+01:00
+Source commit: 53a3f5262747e62d85ae385aae21a400bbf78f67
+Content version: 53a3f5262747
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
