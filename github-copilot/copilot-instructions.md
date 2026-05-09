@@ -42,9 +42,8 @@ Add the Blueprint server under `.github/copilot/mcp.json` (repo-level) or user s
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
 
-## Public signal MCP tools (opt-in, anonymous-allowed)
+## Public feedback MCP tool (opt-in, anonymous-allowed)
 
-- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
 Only call signal tools after explicit user confirmation. Never call silently.

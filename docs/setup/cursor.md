@@ -23,5 +23,4 @@ Cursor works best with the Cursor Rule Pack: a ready-to-unzip bundle of the doct
 - `guides.list()`
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
-- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`

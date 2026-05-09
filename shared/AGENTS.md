@@ -54,9 +54,8 @@ Public retrieval MCP tools:
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
 
-Public signal MCP tools (write, opt-in — anonymous-allowed):
+Public feedback MCP tool (write, opt-in — anonymous-allowed):
 
-- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
 Protected tools exist, but they are not part of the public anonymous setup path:
@@ -65,7 +64,9 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 - `me.coaching_context()`
 - `me.add_evidence(course_slug, stage_id, note)`
 - `me.validation_history(repository?, run_id?, limit?)`
+- `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `architect.validate_consensus(implementation_context, n?, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
 - `architect.certify(run_id, code)`
 - `team.summarize(days_back?)`
 - `handoffs.operator(...)`
