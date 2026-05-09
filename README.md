@@ -1,5 +1,6 @@
 # AI Design Blueprint Integrations
 
+[![smithery badge](https://smithery.ai/badge/zampognamichelangelo/aidesignblueprint)](https://smithery.ai/servers/zampognamichelangelo/aidesignblueprint)
 [![integrations MCP server](https://glama.ai/mcp/servers/aidesignblueprint/integrations/badges/score.svg)](https://glama.ai/mcp/servers/aidesignblueprint/integrations)
 
 Official integrations and installable doctrine for AI Design Blueprint across MCP, IDE rules, prompt files, and agent runtimes.
