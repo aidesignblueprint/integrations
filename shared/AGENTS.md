@@ -92,6 +92,56 @@ Use the Blueprint as a doctrine layer for this task.
 3. State the execution boundary, approval boundary, and fallback path before implementation.
 4. Return the next concrete step, not only analysis.
 
+## MCP Tool Surface Compliance
+
+Two MCP tools, two layers of verification. Understand which is which BEFORE you submit code:
+
+**`architect.validate`** — first-pass doctrine review. Scores on the 10-principle Blueprint alignment. Permissive: doesn't check that the submitted code would actually import or run. A run can score 100/A here AND still fail cert.
+
+**`architect.certify`** — second-pass adversarial review. Rigorous: reads the EXACT validate payload and checks both code correctness AND payload completeness. Pre-LLM rejection class `payload_incomplete` fires when imported modules' surfaces aren't visible — same payload that scored 100/A at validate can cert-reject here.
+
+### Payload Completeness Rule
+
+If you intend to call `architect.certify` on a validate run, bundle public-surface stubs for EVERY imported module in the validate payload:
+
+- `from sqlalchemy.exc import SQLAlchemyError` → include a `class SQLAlchemyError(Exception): pass` stub
+- `from app.db import models` → include a `class models:` namespace stub with the columns/methods you reference
+- Module-level imports of `dataclass`, `Literal`, `json`, `datetime`, `timezone` MUST also be in the payload — cert correctly catches when they're omitted (the module would `NameError` on import as submitted)
+
+**Submit Like Production**: the payload should be the code as it would actually run, not a compressed sketch. If you'd have to add an import to make the file load, add it to the payload.
+
+### Worked example — PR #157 iter8 → iter9 cert downgrade
+
+Same code, three validate runs, two cert rejections — payload-completeness was the differentiator:
+
+1. **iter7 validate**: scored 100/A, tier=production_ready — primitive code only, no stubs. Cert iter8 rejected pre-LLM with `payload_incomplete: app.db not visible`.
+2. **iter9 validate** with `class models:` namespace stub added: scored 100/A again, eligible for cert.
+3. **iter9 cert**: **downgraded to emerging** — cert caught that `@dataclass`, `Literal`, `json`, `datetime`, `timezone` were USED in the payload but never IMPORTED — module would NameError on import. Real on-disk code had the imports; submitted payload had dropped them. Cert was correct to refuse.
+4. **iter10 validate** with module-level imports restored: production_ready confirmed. Cert eligible.
+
+Lesson: cert verifies what would actually happen if your submitted payload was the code in production. Drop nothing.
+
+### Score Variance — single runs are point estimates
+
+Validate scores at `reasoning_effort=high` have an observed empirical variance band of **~20-67 pts on byte-identical input**. Two runs against the same code, same deterministic seed, same `envelope_hash` can produce materially different scores AND different top-blocker rankings, because OpenAI's reasoning models are not strictly deterministic even with the seed parameter pinned.
+
+Empirical evidence (public run-IDs, independently verifiable):
+
+- PR #157 iter1 (33/F) vs iter2 (100/A) on byte-identical baseline-race primitives: **+67 spread**
+- `invoice-payment-manager` run #158 (38/F) vs #159 (74/C): **+36 spread**
+
+Every response carries `reproducibility_mode='best_effort'` — the platform's honest disclosure of this property.
+
+For decisions where stability matters: call `architect.validate_consensus` (N=3-5 aggregated, median verdict + per-principle stability metrics) instead. Collapses the variance, surfaces unstable principles explicitly. A single validate run is a single roll; consensus aggregation is the prescribed mitigation when one roll isn't enough.
+
+### Two-layer verification doctrine
+
+- **validate** — doctrine alignment (10-principle Blueprint). NECESSARY for production_ready, not sufficient.
+- **cert** — adversarial code correctness. Catches what first-pass missed.
+- **YOUR THIRD LAYER** — tests + types + walks. validate + cert do NOT guarantee runtime correctness; only YOUR test suite does. Layer them.
+
+The platform's own recursive-integrity practice: every PR runs validate against its own primitives, then cert. Real bugs were caught BY THE PLATFORM in PR #157 (NULL-UUID false-positive at iter3; tie-breaker mismatch at iter5) that 25 unit tests missed. Two-layer verification is the discipline, not 'either/or'.
+
 ## Showcase your governance
 
 Let your users know this agent was built using safe, governed architectures.
