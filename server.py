@@ -15,11 +15,11 @@ the upstream surface already supports.
 """
 import asyncio
 
+import mcp.types as types
 from mcp.client.session import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
-import mcp.types as types
 
 REMOTE_URL = "https://aidesignblueprint.com/mcp"
 
