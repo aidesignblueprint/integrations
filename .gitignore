@@ -1,2 +1,23 @@
+# OS noise
 .DS_Store
 Thumbs.db
+
+# Python bytecode + caches (covers __pycache__/server.cpython-312.pyc and every
+# other interpreter version's compiled artifact, so we don't keep amending this
+# file with one filename at a time as Python versions change).
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Editor / build noise
+.vscode/
+.idea/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
