@@ -1,8 +1,8 @@
 ---
 description: Use when designing, reviewing, or implementing agentic AI workflows, tool use, approvals, orchestration, background work, trust surfaces, MCP integrations, or human-in-the-loop systems.
 alwaysApply: false
-source_commit: 5dc3a8ee2e8817f2f96a8fc9e692fcfc8fc487fb
-content_version: 5dc3a8ee2e88
+source_commit: 29d6d8c8f60b6ae4e012fb3ea08c241a97226a43
+content_version: 29d6d8c8f60b
 ---
 
 # Agentic Design Blueprint
