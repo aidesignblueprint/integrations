@@ -134,6 +134,24 @@ Every response carries `reproducibility_mode='best_effort'` — the platform's h
 
 For decisions where stability matters: call `architect.validate_consensus` (N=3-5 aggregated, median verdict + per-principle stability metrics) instead. Collapses the variance, surfaces unstable principles explicitly. A single validate run is a single roll; consensus aggregation is the prescribed mitigation when one roll isn't enough.
 
+### Iteration loop — same-repository chaining
+
+Iteration rounds chain via the `repository` field. Pass the SAME repository value across `architect.validate` calls and the validator auto-resolves the most recent prior run as `prior_run_baseline` — the LLM grades the new submission with iteration context (per-principle severity deltas surface in the response). Change the `repository` string between calls — even subtly with an `iter-2` suffix — and the chain silently severs; the next call runs as a fresh blind first-shot with no prior context.
+
+Round numbering belongs in the `task` field or in commit messages, never in `repository`.
+
+The canonical sequence:
+
+```
+validate (round 1) → fix → validate (round 2, anchored to round 1) → fix → ...
+   → validate_consensus (stability check before treating any result as a badge anchor)
+   → architect.certify → mint production_ready badge
+```
+
+The consensus consolidated row IS persisted (lifecycle_status=completed) and becomes a valid prior anchor for the next single-shot validate on the same repository — the chain auto-resumes after consensus.
+
+See the `architect-validation-orchestration` skill in the agent-asset pack for the full walkthrough including the empirical 7/F → 74/C arc that surfaced this discipline.
+
 ### Two-layer verification doctrine
 
 - **validate** — doctrine alignment (10-principle Blueprint). NECESSARY for production_ready, not sufficient.
