@@ -1,2 +1,6 @@
 .DS_Store
 Thumbs.db
+
+# Python bytecode (a2a/ reference agent + any local runs)
+__pycache__/
+*.py[cod]
