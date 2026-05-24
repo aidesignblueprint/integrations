@@ -5,8 +5,8 @@ Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill 
 ## Steps
 
 1. Download `claude-skill-pack.zip` and install it into your Claude skills directory.
-2. Add the MCP server config below to the Claude MCP config file you already use.
-3. Verify the connection with `clusters.list()` after initialize succeeds.
+2. Register the MCP server. Two docs-aligned paths per <https://docs.claude.com/en/docs/claude-code/mcp>: (a) **project-scope** — drop the JSON snippet below into `.mcp.json` at your project root, accept the trust prompt on first session; (b) **user-scope** — run `claude mcp add --transport http aidesignblueprint --scope user https://aidesignblueprint.com/mcp` to register the MCP across all your projects via `~/.claude.json`. **Do NOT** place `mcpServers` inside `.claude/settings.json` — Claude Code v2.x does not read that key.
+3. Verify the connection with `claude mcp list` — should show `aidesignblueprint ✓ Connected`. Then call `clusters.list()` after initialize succeeds.
 4. Keep `agent-kickoff-prompts.md` nearby for first-turn audit and retrieval prompts.
 
 ## Copy block
