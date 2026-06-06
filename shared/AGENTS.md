@@ -100,6 +100,10 @@ Two MCP tools, two layers of verification. Understand which is which BEFORE you 
 
 **`architect.certify`** — second-pass adversarial review. Rigorous: reads the EXACT validate payload and checks both code correctness AND payload completeness. Pre-LLM rejection class `payload_incomplete` fires when imported modules' surfaces aren't visible — same payload that scored 100/A at validate can cert-reject here.
 
+### Timeout and recovery: do not retry
+
+Both tools are long-running LLM calls: 60-180s server-side typical (20-minute server budget), while your MCP client's idle budget is often ~60s. So the call can surface to you as a timeout while the server is still working. **Do not retry.** A retry re-runs the whole 60-180s call, and for cert it burns one of your 3 retry-budget attempts. The `run_id` arrives in the FIRST `notifications/progress` event at t=0s, before the LLM call begins; capture it, then on timeout call `me.validation_history(run_id='<that-id>')` to fetch the persisted result. If the transport drops before that first event (sub-second window), recover with `me.validation_history(repository='<same value>')`.
+
 ### Payload Completeness Rule
 
 If you intend to call `architect.certify` on a validate run, bundle public-surface stubs for EVERY imported module in the validate payload:
@@ -109,6 +113,13 @@ If you intend to call `architect.certify` on a validate run, bundle public-surfa
 - Module-level imports of `dataclass`, `Literal`, `json`, `datetime`, `timezone` MUST also be in the payload — cert correctly catches when they're omitted (the module would `NameError` on import as submitted)
 
 **Submit Like Production**: the payload should be the code as it would actually run, not a compressed sketch. If you'd have to add an import to make the file load, add it to the payload.
+
+There are **two completeness axes**, and both are load-bearing:
+
+1. **Imports:** stub the public surface of every imported module (the four bullets above).
+2. **Enforcement branches:** the code under cert *itself* must be the real logic, fully written. A placeholder body (`# ... execute approved action ...`, `pass  # TODO`, a bare `...`) is not a compression of the control; it is its *absence*. Cert grades what would actually run, so a sketched branch scores as a *missing* control, not as shorthand for one that exists.
+
+Stub your dependencies; never sketch the agent you are certifying. Abbreviated or placeholder submissions are penalised by design, so submit full executable code.
 
 ### Worked example — PR #157 iter8 → iter9 cert downgrade
 
