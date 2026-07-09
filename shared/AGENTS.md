@@ -67,6 +67,7 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 - `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?, private_session?) — Tasks-augmented invocation supported (MCP 2025-11-25, SEP-1686): clients that advertise the `tasks` capability can include `task: {ttl: <ms>}` in request params to receive a CreateTaskResult immediately and poll via tasks/get + tasks/result; sync clients work unchanged. Scope note: only architect.validate task-augments in this release; architect.validate_consensus and architect.certify are sync-only today and extend to task augmentation in the next release. Use me.validation_history(run_id=...) recovery for the sync tools.`
 - `architect.validate_consensus(implementation_context, n?, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
+- `design.validate(implementation_context, task?, goals?, files?, repository?, private_session?). Surface-craft mirror of architect.validate: grades a frontend artefact against the 8 experience-design laws, own weekly quota bucket, sync-only (recover timeouts via me.validation_history(run_id=...)). Sends the artefact to OpenAI for processing (no-training; retained under OpenAI's API data-retention terms), same egress path as architect.validate.`
 - `architect.certify(run_id, code)`
 - `team.summarize(days_back?)`
 - `handoffs.operator(...)`
