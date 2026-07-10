@@ -164,6 +164,14 @@ The consensus consolidated row IS persisted (lifecycle_status=completed) and bec
 
 See the `architect-validation-orchestration` skill in the agent-asset pack for the full walkthrough including the empirical 7/F → 74/C arc that surfaced this discipline.
 
+### `design.validate`: the surface mirror
+
+`design.validate` is the experience-design equivalent of `architect.validate`: it grades a FRONTEND artefact (component, screen, flow) against the 8 experience-design laws instead of agent code against the 10 principles. Same `run_id` timeout-recovery discipline (capture the id from the first progress event, then `me.validation_history(run_id=...)` on timeout) and the same-repository iteration chaining via the `repository` field.
+
+It is single-pass by design in v1: there is no `design.certify`, no `design.validate_consensus`, and no from-repo scan. Accessibility is the floor: the headline grade penalises `production_blocker` findings (a breached experience floor), not aesthetic polish. Use `design.validate` when the artefact under review is a UI surface; use `architect.validate` when it is agent code. The two draw on separate weekly quota buckets.
+
+See the `design-validation-orchestration` skill in the agent-asset pack for the surface-review walkthrough.
+
 ### Two-layer verification doctrine
 
 - **validate** — doctrine alignment (10-principle Blueprint). NECESSARY for production_ready, not sufficient.
