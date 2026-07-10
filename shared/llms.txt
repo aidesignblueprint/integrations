@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-07-10T15:22:34+01:00
-Source commit: 2eea487f456f33a621290a483490f4a22c24f901
-Content version: 2eea487f456f
+Generated at: 2026-07-10T16:26:03+01:00
+Source commit: 5257444bfa70f27b9a7a8246ec939ad4de12944e
+Content version: 5257444bfa70
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
@@ -46,6 +46,6 @@ AI Design Blueprint is designed for enterprise and proprietary codebases.
 
 - PUBLIC TOOLS (Read-Only): The 12 public MCP tools are stateless reference APIs. They do NOT ingest, read, or store any of your codebase, prompts, or proprietary data. Safe for any company environment.
 - AUTHENTICATED TOOLS (Pro/Teams): Tools like architect.validate send payloads to OpenAI (US) under a no-training-on-API-data policy, retained under OpenAI's API data-retention terms. Zero-training policy: we do not train models on user code, validation payloads, or architecture diagrams.
-- PRIVATE SESSION: Pass private_session=true to architect.validate or team.summarize to bypass all server-side database logging — enforced in code at the MCP server layer, not just in policy.
+- PRIVATE SESSION: Pass private_session=true to architect.validate or design.validate to skip the stored run (no run_id, result_json, or badge) for that call. Operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy for abuse, availability, and incident investigation. Enforced in code at the MCP server layer, not just in policy.
 - COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); code sent to architect.validate / .certify is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request.
 - TRUST PAGE: https://aidesignblueprint.com/en/for-agents/trust-and-data-handling
