@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-07-10T21:09:27+01:00
-Source commit: 22360248501d00167bc01d63bba3ec09fcb2170a
-Content version: 22360248501d
+Generated at: 2026-07-11T00:22:29+01:00
+Source commit: 5003b069c990f6da3a2a846cdc61f7b9f4dd0350
+Content version: 5003b069c990
 
 Primary entrypoints:
 - https://aidesignblueprint.com/en/for-agents
@@ -46,6 +46,6 @@ AI Design Blueprint is designed for enterprise and proprietary codebases.
 
 - PUBLIC TOOLS (Read-Only): The 12 public MCP tools are stateless reference APIs. They do NOT ingest, read, or store any of your codebase, prompts, or proprietary data. Safe for any company environment.
 - AUTHENTICATED TOOLS (Pro/Teams): Tools like architect.validate send payloads to OpenAI (US) under a no-training-on-API-data policy, retained under OpenAI's API data-retention terms. Zero-training policy: we do not train models on user code, validation payloads, or architecture diagrams.
-- PRIVATE SESSION: Pass private_session=true to architect.validate or design.validate to skip the stored run (no run_id, result_json, or badge) for that call. Operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy for abuse, availability, and incident investigation. Enforced in code at the MCP server layer, not just in policy.
-- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); code sent to architect.validate / .certify is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request.
+- PRIVATE SESSION: Pass private_session=true to architect.validate, design.validate, or spec.validate to skip the stored run (no run_id, result_json, or badge) for that call; team.summarize accepts it too, skipping the call log. Operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy for abuse, availability, and incident investigation. Enforced in code at the MCP server layer, not just in policy.
+- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); content sent to the validators (architect.validate / .certify, design.validate, spec.validate) is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request.
 - TRUST PAGE: https://aidesignblueprint.com/en/for-agents/trust-and-data-handling
