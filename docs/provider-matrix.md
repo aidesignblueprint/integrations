@@ -40,6 +40,7 @@ Use this matrix to pick the smallest truthful setup for each tool or runtime.
 - `me.add_evidence(course_slug, stage_id, note)`
 - `me.validation_history(repository?, run_id?, limit?)`
 - `me.sessions(session_id?)`
+- `me.session_event(session_id, event_type, actor, summary). GEP-M6 team mode: append a typed team event (handoff | pushback | steer | plan_preview | gate; actor pm | engineer | designer | human | system) to a Governed Session's timeline. Requires team_agents enabled on the session; refused on standalone sessions.`
 - `signals.report(event_type, surface_used?, brief_context?, perceived_value?, workflow_stage?, would_recommend?, team_size?)`
 - `architect.validate(implementation_context, focus_area?, task?, language?, repository?, files?, goals?, example_limit?, private_session?, session_id?) — Tasks-augmented invocation supported (MCP 2025-11-25, SEP-1686): clients that advertise the `tasks` capability can include `task: {ttl: <ms>}` in request params to receive a CreateTaskResult immediately and poll via tasks/get + tasks/result; sync clients work unchanged. Scope note: only architect.validate task-augments in this release; architect.validate_consensus and architect.certify are sync-only today and extend to task augmentation in the next release. Use me.validation_history(run_id=...) recovery for the sync tools.`
 - `architect.validate_consensus(implementation_context, n?, focus_area?, task?, language?, repository?, files?, goals?, example_limit?)`
