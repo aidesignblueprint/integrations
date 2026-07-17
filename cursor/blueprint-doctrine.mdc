@@ -1,13 +1,19 @@
 ---
 description: Use when designing, reviewing, or implementing agentic AI workflows, tool use, approvals, orchestration, background work, trust surfaces, MCP integrations, or human-in-the-loop systems.
 alwaysApply: false
-source_commit: 173a8b96a98cd19e4efe3fc29aee14d152ea9297
-content_version: 173a8b96a98c
+source_commit: 17188f99cab3fda7f87d8d0741bc510344bd9440
+content_version: 17188f99cab3
 ---
 
 # Agentic Design Blueprint
 
 Use these rules when generating agentic product or workflow code.
+
+## Validator trio (Pro/Teams, via the AIDB MCP server in .cursor/mcp.json)
+
+- `spec.validate` — score a WRITTEN spec against the 8 spec-quality laws before anyone builds from it (PM lens).
+- `architect.validate` — score agentic code against the 10 principles below (Engineer lens).
+- `design.validate` — score a rendered surface against the 8 experience-design laws (Designer lens).
 
 ## 1. Design for delegation rather than direct manipulation
 - Slug: `design-for-delegation-rather-than-direct-manipulation`
