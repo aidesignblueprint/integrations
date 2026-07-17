@@ -59,8 +59,10 @@ Signal tools write only the structured fields you pass. No prompts, no code, no 
 
 - `me.learning_path()`
 - `me.coaching_context()`
-- `architect.validate(implementation_context, ..., private_session?)` — Pro/Teams; set `private_session=true` to skip all server-side logging for that call
-- `team.summarize(days_back?, private_session?)` — Pro/Teams; usage reflection and recommended next assets
+- `architect.validate(implementation_context, ..., private_session?)` — Pro/Teams; scores agentic code against the 10 principles; set `private_session=true` to skip the stored run for that call
+- `design.validate(implementation_context, ..., private_session?)` — Pro/Teams; the surface mirror: scores a rendered frontend artefact against the 8 experience-design laws (own weekly bucket)
+- `spec.validate(implementation_context, ..., private_session?)` — Pro/Teams; the what-to-build lens: scores a written specification against the 8 spec-quality laws (own weekly bucket)
+- `team.summarize(days_back?, private_session?)` — Pro/Teams; usage reflection and recommended next assets across all three validator lenses
 - `me.add_evidence(course_slug, stage_id, note)`
 
 ## Feedback and value signal rules

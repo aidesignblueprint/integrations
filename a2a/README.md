@@ -87,7 +87,7 @@ In the Teams scenario, production agents (LangGraph, CrewAI, AutoGen) call the B
 coach during their own workflows — governance runs automatically, without human intervention.
 
 - **Basic**: Human reads MCP doctrine in their IDE
-- **Pro**: Human submits code, `architect.validate` returns violations
+- **Pro**: Human submits code, `architect.validate` returns violations (siblings: `design.validate` for surfaces, `spec.validate` for written specs)
 - **Teams** _(coming soon)_: Production agents call Blueprint coach as an A2A peer
 
 ## Governance badge
