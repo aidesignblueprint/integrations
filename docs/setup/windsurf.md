@@ -17,7 +17,7 @@ Windsurf should start from the workspace rule file, with `AGENTS.md` as the cros
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

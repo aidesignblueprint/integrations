@@ -1,8 +1,8 @@
 # Agentic Design Blueprint
 
-- Generated at: 2026-07-17T17:36:11+01:00
-- Source commit: f99874fa9dc87f2ab4b8e10efee70c6e1845425c
-- Content version: f99874fa9dc8
+- Generated at: 2026-09-10T11:00:16+01:00
+- Source commit: 41b1998f0cbb041c7ac7deca527558de6c17c753
+- Content version: 41b1998f0cbb
 
 ## Summary
 
@@ -1099,6 +1099,69 @@ Implications:
 - Version: 5fd90f57f8a1
 - Last updated: 2026-03-14T14:44:14Z
 - Summary: from typing import List, Dict from pydantic import BaseModel, Field from openai import OpenAI import os import logging # Set up logging configuration logging.basicConfig( level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S", ) logger
+
+### Corrective RAG: grade what you retrieved before you answer
+
+- Slug: `pattern-corrective-rag`
+- Difficulty: intermediate
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: Every retrieved passage is graded for relevance, the failures are discarded, and the answer is written only from what survived. If nothing survives, the pattern refuses to answer rather than inferring from unrelated context.
+
+### Dry-Run: simulate before you execute
+
+- Slug: `pattern-dry-run`
+- Difficulty: intermediate
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: The agent proposes an action, a simulator predicts its effect and reversibility, and a deterministic policy gate decides whether it runs. The model never reaches the real function; the boundary is an `if` in Python, not an instruction it can talk past.
+
+### Episodic and semantic memory: remember turns, and remember facts
+
+- Slug: `pattern-episodic-semantic`
+- Difficulty: intermediate
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: Two stores answering different questions. Episodic keeps what was said and when; semantic keeps extracted, deduplicated facts about the user. Retrieval defaults to facts, and reaches for transcripts only when the question is genuinely about what happened.
+
+### ReAct: reason, act, observe, repeat
+
+- Slug: `pattern-react`
+- Difficulty: beginner
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: The model alternates between explicit reasoning and tool calls, feeding each observation back until it can answer. The reasoning is a first-class inspectable field rather than something that happened inside the model, and that is what separates ReAct from plain tool-calling.
+
+### Reflection: draft, critique, revise
+
+- Slug: `pattern-reflection`
+- Difficulty: beginner
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: One pass drafts, a separate adversarial pass critiques it against a stated rubric, and a third rewrites using that critique. The critic is a distinct call with its own instruction, because a model asked to check its own work inside one completion tends to agree with itself.
+
+### Self-consistency: sample several paths, take the majority
+
+- Slug: `pattern-self-consistency`
+- Difficulty: intermediate
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: Ask the same question N times at a temperature high enough to produce genuinely different reasoning, then take the answer the paths converge on. The vote is plain code, not another model call, because asking a model to pick the best of N restores the single point of failure the sampling removed.
+
+### Supervisor and workers: route subtasks to specialists
+
+- Slug: `pattern-supervisor-workers`
+- Difficulty: advanced
+- Libraries: openai, pydantic, python-dotenv
+- Version: 7543bed03e61
+- Last updated: 2026-07-28T15:59:55+01:00
+- Summary: A supervisor decomposes a request into typed subtasks, assigns each to a named specialist with its own instruction and its own slice of context, and a synthesiser merges the results while preserving disagreement.
 
 ## Application Guides
 

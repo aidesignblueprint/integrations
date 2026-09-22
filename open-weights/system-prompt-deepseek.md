@@ -27,7 +27,7 @@ Use this doctrine when implementing or reviewing AI-native systems.
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

@@ -30,7 +30,7 @@ Configure the blueprint as an HTTP MCP server and keep the local JSON as fallbac
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

@@ -23,7 +23,7 @@ Use this matrix to pick the smallest truthful setup for each tool or runtime.
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

@@ -17,6 +17,7 @@ Apply this rule to AI features, agents, copilots, and workflow automations.
 - Preserve undo, retry, rollback, or repair when state changes happen.
 - Prefer structured outputs and inspectable payloads.
 - Optimize for real production usage, not just demo behavior.
+- When choosing a shape, retrieve an agentic design pattern before a generic example: patterns state what the shape expresses, what its default form breaks, and the fix.
 
 ## Setup
 
@@ -44,7 +45,7 @@ Apply this rule to AI features, agents, copilots, and workflow automations.
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

@@ -1,4 +1,4 @@
-# AI Design Blueprint — Gemini Context
+# AI Design Blueprint: Gemini Context
 
 Use this file as persistent project context for Gemini CLI when working on AI-native systems.
 
@@ -16,7 +16,7 @@ Use this file as persistent project context for Gemini CLI when working on AI-na
 ## Setup
 
 - Keep this file at project root as `GEMINI.md`.
-- Install `gemini-skill-pack.zip` for the always-on Agent Skill: unzip into project root or `~` — installs `.agents/skills/agentic-design-blueprint/SKILL.md`.
+- Install `gemini-skill-pack.zip` for the always-on Agent Skill: unzip into project root or `~`; it installs `.agents/skills/agentic-design-blueprint/SKILL.md`.
 - Keep `llms.txt` nearby as the lightweight discovery companion.
 - Use the MCP endpoint only when you want live doctrine retrieval.
 
@@ -28,7 +28,7 @@ Use this file as persistent project context for Gemini CLI when working on AI-na
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`

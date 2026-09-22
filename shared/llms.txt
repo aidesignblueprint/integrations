@@ -1,51 +1,57 @@
 # Agentic Design Blueprint
 
-Generated at: 2026-07-17T17:36:11+01:00
-Source commit: f99874fa9dc87f2ab4b8e10efee70c6e1845425c
-Content version: f99874fa9dc8
+> The Agentic Design Blueprint is a doctrine handbook and MCP server for building agentic AI products: principles, agentic design patterns, examples, and a validator trio (architect.validate, design.validate, spec.validate) delivered as machine- and human-readable assets for AI coding agents to fetch and follow.
 
-Primary entrypoints:
-- https://aidesignblueprint.com/en/for-agents
-- https://aidesignblueprint.com/en/security-application
-- https://aidesignblueprint.com/en/observable-evaluation
-- https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.json
-- https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.md
-- https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc
-- https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip
-- https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip
-- https://aidesignblueprint.com/agent-assets/gemini-skill-pack.zip
-- https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip
-- https://aidesignblueprint.com/agent-assets/cursor-rule-pack.zip
-- https://aidesignblueprint.com/agent-assets/agent-kickoff-prompts.md
-- https://aidesignblueprint.com/agent-assets/codex.config.toml
-- https://aidesignblueprint.com/agent-assets/AGENTS.md
-- https://aidesignblueprint.com/agent-assets/blueprint-core.md
-- https://aidesignblueprint.com/agent-assets/copilot-instructions.md
-- https://aidesignblueprint.com/agent-assets/GEMINI.md
-- https://aidesignblueprint.com/agent-assets/system-prompt-deepseek.md
-- https://aidesignblueprint.com/agent-assets/system-prompt-qwen.md
-- https://aidesignblueprint.com/agent-assets/claude-code.mcp.json
-- https://aidesignblueprint.com/agent-assets/provider-matrix.md
+Agentic design patterns are the highest-value entries in the retrieval surface. Each is runnable and carries a doctrine binding saying which principles the shape expresses in code (`structural`), which its textbook form breaks by default along with the fix (`default_gap`), and which your implementation decides (`depends`). Reach for a pattern before a generic example: a flat principle list cannot distinguish code that EXPRESSES a principle from code that VIOLATES it, and those are opposite claims. Retrieve with examples.search(pattern_family=...) or filter results to entry_kind 'pattern'. Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
 
-Setup docs:
-- https://aidesignblueprint.com/agent-assets/setup-claude-code.md
-- https://aidesignblueprint.com/agent-assets/setup-codex.md
-- https://aidesignblueprint.com/agent-assets/setup-cursor.md
-- https://aidesignblueprint.com/agent-assets/setup-windsurf.md
-- https://aidesignblueprint.com/agent-assets/setup-github-copilot.md
-- https://aidesignblueprint.com/agent-assets/setup-gemini-cli.md
-- https://aidesignblueprint.com/agent-assets/setup-local-models.md
-- https://aidesignblueprint.com/agent-assets/setup-openai-actions.md
+Generated at: 2026-09-20T18:39:55+01:00. Source commit: 8bb7349a7c6533a360182e528ec58be7a102c29d. Content version: 8bb7349a7c65.
 
-MCP:
-- https://aidesignblueprint.com/mcp
+Enterprise trust & security. AI Design Blueprint is designed for enterprise and proprietary codebases:
 
-# Enterprise Trust & Security
-
-AI Design Blueprint is designed for enterprise and proprietary codebases.
-
-- PUBLIC TOOLS (Read-Only): The 12 public MCP tools are stateless reference APIs. They do NOT ingest, read, or store any of your codebase, prompts, or proprietary data. Safe for any company environment.
+- PUBLIC TOOLS: the doctrine tools are read-only lookups that accept only query strings; none reads your codebase, prompts, or file contents. One public tool, signals.feedback, writes a record, only when the user explicitly asks; with a contact email and follow-up permission its free text is sent to OpenAI (US) for triage, and the email itself is never sent.
 - AUTHENTICATED TOOLS (Pro/Teams): The validators (architect.validate, design.validate, spec.validate) send payloads to OpenAI (US) under a no-training-on-API-data policy, retained under OpenAI's API data-retention terms. Zero-training policy: we do not train models on user code, validation payloads, or architecture diagrams.
 - PRIVATE SESSION: Pass private_session=true to architect.validate, design.validate, or spec.validate to skip the stored run (no run_id, result_json, or badge) for that call; team.summarize accepts it too, skipping the call log. Operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy for abuse, availability, and incident investigation. Enforced in code at the MCP server layer, not just in policy.
-- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); content sent to the validators (architect.validate / .certify, design.validate, spec.validate) is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request.
-- TRUST PAGE: https://aidesignblueprint.com/en/for-agents/trust-and-data-handling
+- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); content sent to the validators (architect.validate / .certify, design.validate, spec.validate) is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request. Full detail on the trust page linked under Optional below.
+
+## Primary entrypoints
+
+- [For Agents](https://aidesignblueprint.com/en/for-agents): entry page for AI coding agents — doctrine overview, install ladder, MCP quick-start
+- [Security & Application](https://aidesignblueprint.com/en/security-application): the enterprise security and application-review surface
+- [Observable Evaluation](https://aidesignblueprint.com/en/observable-evaluation): the evaluation and observability doctrine page
+- [Doctrine corpus (JSON)](https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.json): machine-readable principles, clusters, and examples
+- [Doctrine corpus (Markdown)](https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.md): human-readable principles, clusters, and examples
+- [Cursor rules](https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc): the doctrine as a `.mdc` Cursor rule file
+- [Claude skill pack](https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip): zip — SKILL.md following the agentskills.io standard
+- [Codex skill pack](https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip): zip — Codex-flavored skill bundle
+- [Gemini skill pack](https://aidesignblueprint.com/agent-assets/gemini-skill-pack.zip): zip — Gemini CLI skill bundle
+- [Qwen skill pack](https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip): zip — Qwen-flavored skill bundle
+- [Cursor rule pack](https://aidesignblueprint.com/agent-assets/cursor-rule-pack.zip): zip — `.cursor/rules` + `.cursor/mcp.json`
+- [Agent kickoff prompts](https://aidesignblueprint.com/agent-assets/agent-kickoff-prompts.md): ready-to-paste prompts for starting an agent session
+- [Codex config](https://aidesignblueprint.com/agent-assets/codex.config.toml): `codex.config.toml` for the OpenAI Codex CLI
+- [AGENTS.md](https://aidesignblueprint.com/agent-assets/AGENTS.md): the agents.md-standard entrypoint doc
+- [Blueprint core](https://aidesignblueprint.com/agent-assets/blueprint-core.md): condensed doctrine core reference
+- [Copilot instructions](https://aidesignblueprint.com/agent-assets/copilot-instructions.md): GitHub Copilot custom-instructions file
+- [GEMINI.md](https://aidesignblueprint.com/agent-assets/GEMINI.md): Gemini CLI project-memory file
+- [DeepSeek system prompt](https://aidesignblueprint.com/agent-assets/system-prompt-deepseek.md): system prompt for DeepSeek agents
+- [Qwen system prompt](https://aidesignblueprint.com/agent-assets/system-prompt-qwen.md): system prompt for Qwen agents
+- [Claude Code MCP config](https://aidesignblueprint.com/agent-assets/claude-code.mcp.json): `claude-code.mcp.json` MCP server registration
+- [Provider matrix](https://aidesignblueprint.com/agent-assets/provider-matrix.md): which asset to use for which agent or provider
+
+## Setup docs
+
+- [Claude Code setup](https://aidesignblueprint.com/agent-assets/setup-claude-code.md)
+- [Codex setup](https://aidesignblueprint.com/agent-assets/setup-codex.md)
+- [Cursor setup](https://aidesignblueprint.com/agent-assets/setup-cursor.md)
+- [Windsurf setup](https://aidesignblueprint.com/agent-assets/setup-windsurf.md)
+- [GitHub Copilot setup](https://aidesignblueprint.com/agent-assets/setup-github-copilot.md)
+- [Gemini CLI setup](https://aidesignblueprint.com/agent-assets/setup-gemini-cli.md)
+- [Local models setup](https://aidesignblueprint.com/agent-assets/setup-local-models.md)
+- [OpenAI Actions setup](https://aidesignblueprint.com/agent-assets/setup-openai-actions.md)
+
+## MCP
+
+- [MCP server](https://aidesignblueprint.com/mcp): JSON-RPC endpoint exposing the 12 public read-only tools plus the authenticated validator trio (architect.validate, design.validate, spec.validate)
+
+## Optional
+
+- [Trust & data handling](https://aidesignblueprint.com/en/for-agents/trust-and-data-handling): full GDPR, DPA, and data-residency detail

@@ -16,17 +16,42 @@ Use this doctrine when building or reviewing AI-native features, coding agents, 
 ## Working method
 
 - Start by naming the principle or cluster most relevant to the task.
+- Reach for an agentic design pattern before a generic example. See below.
 - Prefer prepare, propose, or draft before execute when the action is risky or externally visible.
 - Keep intermediate agent state visible during long-running work.
 - Use deterministic fallback paths when the model is uncertain or a tool fails.
 - Keep payloads structured, typed, and inspectable where possible.
+
+## Agentic design patterns take precedence over generic examples
+
+`examples.search` and `examples.get` return two kinds of entry. Prefer the first kind whenever both are available.
+
+**Agentic design patterns** (`entry_kind: "pattern"`) are first-party, each one runnable, and each one carries an explicit doctrine binding in `doctrine_relations`. Every relation is one of:
+
+- `structural`: the pattern expresses that principle directly in code.
+- `default_gap`: the pattern's TEXTBOOK form violates that principle, and the note states the concrete fix. This is the highest-value field in the whole retrieval surface and it exists nowhere else.
+- `depends`: your implementation decides, not the pattern. No verdict is asserted.
+
+A principle with no relation is one the pattern makes no claim about. Absence is deliberate, not missing data.
+
+**Generic examples** (`entry_kind: "example"`) are upstream cookbook snapshots. They carry a flat `principle_ids` list and no binding: useful for seeing a library used, but they do not tell you what a shape breaks.
+
+Why the precedence: a flat `principle_ids` list cannot distinguish "this code EXPRESSES principle 8" from "this code VIOLATES principle 8 by default". Those are opposite claims. Only a pattern tells you which one you are looking at, so a pattern is the better answer to "what shape should I build, and what will it cost me".
+
+Practical use:
+
+- Choosing an architecture: `examples.search(query, pattern_family=...)` to browse one family, or search normally and prefer the pattern rows.
+- Fixing a failing principle from a validation run: search with `principle_ids=[N]`. Patterns whose relation to N is `structural` show the fix; patterns whose relation is `default_gap` show what commonly causes it.
+- Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
+
+Honesty rule for anything you build on these: `doctrine_binding_basis` states that the binding is hand-authored first-party analysis, not the output of an `architect.validate` run. Do not present it as a scored verdict. Run the validator on real code to get one of those.
 
 ## Enterprise security context
 
 If the user asks about data privacy, enterprise compliance, or whether this MCP is safe for proprietary code:
 
 1. The MCP connection is safe for enterprise use.
-2. The 12 public MCP tools are stateless, read-only reference APIs that do not ingest or transmit codebase data — they receive only structured query IDs and return public doctrine content.
+2. The public doctrine tools are read-only lookups: they receive only structured query IDs and return public doctrine content, and none accepts codebase data. One public tool, signals.feedback, writes a record when the user explicitly asks; with a contact email and follow-up permission its free text is sent to OpenAI (US) for triage, and the email itself is never sent.
 3. For architectural validation (architect.validate, Pro/Teams), your code is sent to OpenAI (US) under a no-training-on-API-data policy and retained under OpenAI's API data-retention terms; AI Design Blueprint stores only the structured result, not your raw code. Zero-training policy: we do not train AI models on user code.
 4. Pass private_session=true on architect.validate, design.validate, or spec.validate (and team.summarize, which skips the call log) to skip the stored run (no run_id, result_json, or badge) for that call; operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy. Enforced in code, not just in policy.
 5. UK/EU hosting (Google Cloud Run europe-west2); code is processed by OpenAI (US) under the EU SCCs and UK Addendum. Designed in line with UK GDPR and EU GDPR data-minimisation principles. DPAs available on the Teams plan on request.
@@ -48,7 +73,7 @@ Public retrieval MCP tools:
 - `clusters.get(slug)`
 - `examples.get(slug)`
 - `principles.search(query, limit?)`
-- `examples.search(query, principle_ids?, difficulty?, library?, limit?)`
+- `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
 - `guides.get(slug)`
@@ -78,6 +103,16 @@ Protected tools exist, but they are not part of the public anonymous setup path:
 - `handoffs.partnership(...)`
 - `handoffs.agency(...)`
 
+## Badges and public review links are private by default
+
+`architect.validate` and `architect.certify` return `badge_url` and `review_url`. **Both 404 until the run's owner publishes the run.** Runs are private by default and the public resolver fails closed, which is deliberate: a run never leaks before its owner says so.
+
+Read the `public_review` block in the response before using either URL. It reports whether the URLs resolve and where to publish.
+
+- Do NOT put either URL in a README, PR description, or docs page until the run is published. It renders as a broken image.
+- Publishing is an owner action on the readiness-review dashboard, per run or for a whole project.
+- `me.validation_history(run_id=...)` reports the definite state for an existing run, because it reads the row.
+
 ## Feedback and value signal rules
 
 - Only call `signals.report` after the user has clearly expressed that something was useful.
@@ -87,6 +122,8 @@ Protected tools exist, but they are not part of the public anonymous setup path:
   Never prompt for it without a clear signal from the user.
 - Never include proprietary code, file contents, or secrets in brief_context.
 - These tools only send the structured fields you pass. Static files send nothing.
+  With a contact email and permission to follow up, signals.feedback also sends
+  its free text to OpenAI (US) for triage; the email itself is never sent.
 
 ## First prompt
 
@@ -107,7 +144,7 @@ Two MCP tools, two layers of verification. Understand which is which BEFORE you 
 
 ### Timeout and recovery: do not retry
 
-Both tools are long-running LLM calls: 60-180s server-side typical (20-minute server budget), while your MCP client's idle budget is often ~60s. So the call can surface to you as a timeout while the server is still working. **Do not retry.** A retry re-runs the whole 60-180s call, and for cert it burns one of your 3 retry-budget attempts. The `run_id` arrives in the FIRST `notifications/progress` event at t=0s, before the LLM call begins; capture it, then on timeout call `me.validation_history(run_id='<that-id>')` to fetch the persisted result. If the transport drops before that first event (sub-second window), recover with `me.validation_history(repository='<same value>')`.
+Both tools are long-running LLM calls: 60-180s server-side typical (6-minute server budget), while your MCP client's idle budget is often ~60s. So the call can surface to you as a timeout while the server is still working. **Do not retry.** A retry re-runs the whole 60-180s call, and for cert it burns one of your 3 retry-budget attempts. The `run_id` arrives in the FIRST `notifications/progress` event at t=0s, before the LLM call begins; capture it, then on timeout call `me.validation_history(run_id='<that-id>')` to fetch the persisted result. If the transport drops before that first event (sub-second window), recover with `me.validation_history(repository='<same value>')`.
 
 ### Payload Completeness Rule
 

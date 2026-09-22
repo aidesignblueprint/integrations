@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-17T17:36:11+01:00",
-  "source_commit": "f99874fa9dc87f2ab4b8e10efee70c6e1845425c",
-  "content_version": "f99874fa9dc8",
+  "generated_at": "2026-09-10T11:00:16+01:00",
+  "source_commit": "41b1998f0cbb041c7ac7deca527558de6c17c753",
+  "content_version": "41b1998f0cbb",
   "title": "AI Design Principle Blueprint",
   "purpose": "This document defines the core design principles for AI-enabled products and services in which the system does more than respond to user inputs. It interprets intent, performs actions, coordinates processes, and completes work on the user’s behalf.\n\nConventional digital experiences were designed around direct interaction. In that model, the user remains the primary operator throughout the journey, progressing step by step through a sequence of actions.\n\nAI systems, particularly agentic systems, introduce a materially different model. In these environments, the user is no longer solely the operator of the interface. Instead, the user increasingly assumes the role of supervisor, director, or decision-maker, while the system undertakes execution.\n\nThis blueprint establishes the design principles required to support that transition responsibly and coherently.",
   "strategic_premise": "Traditional interaction design rests on several assumptions:\n\n* the user is continuously present\n* the user performs each material step directly\n* the user requires visibility of each stage of the process\n* the interface is the principal site of value creation\n\nThese assumptions weaken when AI systems are capable of acting independently, operating asynchronously, and coordinating work across tools, data sources, or multiple agents.\n\nIn an agentic context, the product experience is no longer defined solely by the visible interface. It is defined by the relationship between:\n\n* user intent\n* delegated authority\n* system execution\n* visibility and accountability\n* human intervention when required\n* review and acceptance of outcomes\n\nThe central design question therefore changes.\n\nIt is no longer only: **How does the user complete the task?**\n\nIt becomes: **How does the user delegate the task safely, remain appropriately informed, and intervene only when necessary?**",
@@ -3044,6 +3044,480 @@
       ],
       "deprecated_at": null,
       "replacement_example_slug": null
+    },
+    {
+      "id": "pattern-retrieval-corrective-rag",
+      "slug": "pattern-corrective-rag",
+      "title": "Corrective RAG: grade what you retrieved before you answer",
+      "summary": "Every retrieved passage is graded for relevance, the failures are discarded, and the answer is written only from what survived. If nothing survives, the pattern refuses to answer rather than inferring from unrelated context.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        5,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "retrieval",
+      "when_to_use": "Any retrieval system where a near-miss passage would be summarised into a confident wrong answer. The value is not better recall; it is refusing to answer from passages that merely share vocabulary with the question.",
+      "doctrine_relations": [
+        {
+          "principle_id": 7,
+          "relation": "depends",
+          "note": "The grading verdicts and the discarded set exist inside the pattern, but nothing in the pattern requires showing them. A wrapper that surfaces 'kept 2 of 4, here is why each was dropped' is inspectable; one that returns only the answer is not. The pattern does not decide this, so no verdict is asserted.",
+          "code_ref": "corrective_rag.py:grade"
+        },
+        {
+          "principle_id": 6,
+          "relation": "depends",
+          "note": "'3 of 5 sources discarded as irrelevant' is meaningful operational state, and the data for it is produced on every run. Whether it reaches the operator is a wrapper decision, not a property of the pattern.",
+          "code_ref": "corrective_rag.py:run"
+        },
+        {
+          "principle_id": 5,
+          "relation": "default_gap",
+          "note": "Passages are dropped silently by default, so the user cannot tell that retrieval happened, that it was filtered, or what governed the filtering. The answer looks like recall rather than a governed process. Fix: state the retrieval and grading outcome alongside the answer, and make the refusal path explicit so 'I could not ground this' is a visible outcome rather than an absence.",
+          "code_ref": "corrective_rag.py:run"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-safety-routing-dry-run",
+      "slug": "pattern-dry-run",
+      "title": "Dry-Run: simulate before you execute",
+      "summary": "The agent proposes an action, a simulator predicts its effect and reversibility, and a deterministic policy gate decides whether it runs. The model never reaches the real function; the boundary is an `if` in Python, not an instruction it can talk past.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        4,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "safety-routing",
+      "when_to_use": "Any agent that can take an action the user would not want undone by accident: deletion, payment, sending, deploying, writing to production. Use it wherever 'the agent did it before I could stop it' is a plausible incident report.",
+      "doctrine_relations": [
+        {
+          "principle_id": 8,
+          "relation": "structural",
+          "note": "The pattern IS P8 in code, but only because permission is derived from the Proposal (a constrained action enum plus a path, checked against REQUIRES_PATH, IRREVERSIBLE_ACTIONS and PROTECTED_PATHS) rather than from the model-authored Simulation. The simulation runs second and can only ever veto, never permit. Argument validity is part of the gate rather than the call site, so a proposal that would crash on dispatch is refused with a reason instead of raising. Every Verdict carries a specific reason and the caller surfaces it as `BLOCKED : {reason}`, naming both the cause and what is required next, so a blocked action never fails silently.",
+          "code_ref": "dry_run.py:review"
+        },
+        {
+          "principle_id": 4,
+          "relation": "default_gap",
+          "note": "The run prints its whole derivation every time: proposal, intent, predicted effect, reversibility, blast radius, concerns, verdict. That is full disclosure, not progressive disclosure, and at any real volume it buries the outcome in diagnostics. Fix: return the outcome by default and keep the Proposal, Simulation and Verdict as an inspection record the operator opens on demand.",
+          "code_ref": "dry_run.py:run"
+        },
+        {
+          "principle_id": 10,
+          "relation": "default_gap",
+          "note": "The flow is one-shot: it executes or it returns blocked, and the only way to steer is to restart with a new request. A blocked proposal is discarded rather than held. Fix: persist the proposal and simulation as a handoff state that accepts approve, reject, or revise against the same record, so a block becomes a decision point instead of a dead end.",
+          "code_ref": "dry_run.py:run"
+        },
+        {
+          "principle_id": 7,
+          "relation": "structural",
+          "note": "Every input to the decision is surfaced before the decision: the proposal, the stated intent, the predicted effect, reversibility, blast radius, and any concerns. The verdict can be re-derived by hand from what is printed.",
+          "code_ref": "dry_run.py:run"
+        },
+        {
+          "principle_id": 2,
+          "relation": "default_gap",
+          "note": "The simulate step is a second model call, and by default nothing is emitted while it runs, so the operator sees a stalled terminal rather than work in progress. Latency here is inherent to the pattern, not to this implementation. Fix: emit a phase signal ('proposing', 'simulating', 'reviewing') before each step rather than printing only on completion.",
+          "code_ref": "dry_run.py:run"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-memory-episodic-semantic",
+      "slug": "pattern-episodic-semantic",
+      "title": "Episodic and semantic memory: remember turns, and remember facts",
+      "summary": "Two stores answering different questions. Episodic keeps what was said and when; semantic keeps extracted, deduplicated facts about the user. Retrieval defaults to facts, and reaches for transcripts only when the question is genuinely about what happened.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        4,
+        5,
+        7,
+        8
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "memory",
+      "when_to_use": "Any assistant expected to know the user across sessions. The split matters most once the transcript is long: loading old conversations to 'remember' someone is expensive and drags the answer toward whatever was being discussed then.",
+      "doctrine_relations": [
+        {
+          "principle_id": 7,
+          "relation": "structural",
+          "note": "Semantic memory is a legible key-value store rather than an opaque embedding blob, so what the system believes about a user can be read, checked, and corrected item by item. A memory layer whose contents can only be inspected by asking the model what it remembers is not inspectable in any useful sense.",
+          "code_ref": "episodic_semantic.py:FACTS"
+        },
+        {
+          "principle_id": 5,
+          "relation": "default_gap",
+          "note": "The user is never told a fact was extracted and stored about them. From their side the assistant simply starts knowing things, which is the archetypal implied-magic moment and, once it involves personal detail, a trust problem rather than a delight. Fix: surface what was learned at the moment it is written, and make the fact store viewable and editable rather than only inferable from behaviour.",
+          "code_ref": "episodic_semantic.py:remember"
+        },
+        {
+          "principle_id": 4,
+          "relation": "default_gap",
+          "note": "Retrieved memory is injected silently into the prompt, so an answer shaped by something said weeks ago looks identical to one shaped by the current turn. Fix: state which remembered facts informed an answer, at a level the reader can act on, so a wrong or stale fact is correctable at the point it does damage rather than after.",
+          "code_ref": "episodic_semantic.py:answer"
+        },
+        {
+          "principle_id": 8,
+          "relation": "depends",
+          "note": "Whether the user can refuse, edit, or delete what was remembered is entirely a wrapper decision. The pattern writes to a store and reads from it; it takes no position on consent, retention, or erasure. In most jurisdictions that position is not optional, but it is not the pattern's to hold.",
+          "code_ref": "episodic_semantic.py:remember"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-tools-actions-react",
+      "slug": "pattern-react",
+      "title": "ReAct: reason, act, observe, repeat",
+      "summary": "The model alternates between explicit reasoning and tool calls, feeding each observation back until it can answer. The reasoning is a first-class inspectable field rather than something that happened inside the model, and that is what separates ReAct from plain tool-calling.",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        7,
+        8,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "3a50b699aac0",
+          "committed_at": "2026-07-27T22:59:34+01:00",
+          "summary": "fix(mcp): close the pre-deploy governance conditions (#729)"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "tools-actions",
+      "when_to_use": "The default shape for any agent that needs to gather information before answering. Reach for it first, and only add planning, reflection, or multi-agent structure when a measured failure justifies the extra machinery.",
+      "doctrine_relations": [
+        {
+          "principle_id": 7,
+          "relation": "structural",
+          "note": "The defining property of ReAct over plain tool-calling: `thought` is a required field on every step, so the reasoning that led to each action is in the transcript rather than inside the model. A reader can re-derive why any given tool was called.",
+          "code_ref": "react_loop.py:Step"
+        },
+        {
+          "principle_id": 2,
+          "relation": "default_gap",
+          "note": "Default ReAct returns only the final answer. The loop iterates server-side and the caller sees nothing until it finishes, which reads as a hang. Fix, and this implementation does it deliberately: emit the step signal BEFORE the model call, not after, so a step that is still running is visible as running.",
+          "code_ref": "react_loop.py:run"
+        },
+        {
+          "principle_id": 10,
+          "relation": "default_gap",
+          "note": "Once started the loop runs to an answer or to MAX_STEPS. The operator can abort it but cannot redirect it, because there is no point at which new instruction is accepted. Fix: check a steer channel between iterations and fold any pending instruction into the transcript. This implementation does NOT do that, and is a faithful example of the gap.",
+          "code_ref": "react_loop.py:run"
+        },
+        {
+          "principle_id": 8,
+          "relation": "default_gap",
+          "note": "Every action the model selects executes. There is no approval boundary anywhere in the loop, which is safe here only because both tools are read-only. Fix: compose with the dry-run pattern so any irreversible action is proposed, simulated, and gated before it runs.",
+          "code_ref": "react_loop.py:run"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-reasoning-reflection-reflection",
+      "slug": "pattern-reflection",
+      "title": "Reflection: draft, critique, revise",
+      "summary": "One pass drafts, a separate adversarial pass critiques it against a stated rubric, and a third rewrites using that critique. The critic is a distinct call with its own instruction, because a model asked to check its own work inside one completion tends to agree with itself.",
+      "difficulty": "beginner",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        5,
+        7,
+        10
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "reasoning-reflection",
+      "when_to_use": "Where output quality matters more than latency and the failure is subtle rather than obvious: summaries that quietly invent specifics, copy that overstates coverage, answers that read fluent and are wrong. Do not apply it everywhere; it multiplies both cost and time.",
+      "doctrine_relations": [
+        {
+          "principle_id": 7,
+          "relation": "structural",
+          "note": "The critique is a typed artifact rather than a hidden step: failing_rules and what_to_change are surfaced on every round, so a reader can see why a draft was rejected and judge whether the critic was right. A reflection loop that only prints the final text has thrown away the part worth inspecting.",
+          "code_ref": "reflection.py:Critique"
+        },
+        {
+          "principle_id": 2,
+          "relation": "default_gap",
+          "note": "Each round is two or three model calls, so a three-round loop can run for a long time behind a single silent call. Fix, applied here: emit the round number and phase before each call, so a loop that is still working is distinguishable from one that has stalled.",
+          "code_ref": "reflection.py:run"
+        },
+        {
+          "principle_id": 10,
+          "relation": "default_gap",
+          "note": "The rubric is fixed at the start and the loop runs to acceptance or exhaustion. An operator watching a round fail for a reason they disagree with cannot amend the rubric or accept the draft as-is without restarting. Fix: check for an amended rubric or an operator override between rounds, and treat exhaustion as a decision point rather than a return.",
+          "code_ref": "reflection.py:run"
+        },
+        {
+          "principle_id": 5,
+          "relation": "depends",
+          "note": "Whether the reader understands that the answer was revised, and how many times, is a wrapper decision. This implementation prints the arc; a version that returns only the accepted text presents a revised answer as if it were a first draft. The pattern does not decide which you get.",
+          "code_ref": "reflection.py:run"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-sampling-search-self-consistency",
+      "slug": "pattern-self-consistency",
+      "title": "Self-consistency: sample several paths, take the majority",
+      "summary": "Ask the same question N times at a temperature high enough to produce genuinely different reasoning, then take the answer the paths converge on. The vote is plain code, not another model call, because asking a model to pick the best of N restores the single point of failure the sampling removed.",
+      "difficulty": "intermediate",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        5,
+        6,
+        7
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "sampling-search",
+      "when_to_use": "Short factual or arithmetic answers where a single path is occasionally and silently wrong, and where you can afford N times the cost. Useless for open-ended generation, where there is no answer to count.",
+      "doctrine_relations": [
+        {
+          "principle_id": 6,
+          "relation": "structural",
+          "note": "The vote distribution IS the operational state, and returning it is what separates this pattern from an expensive single call. Five of five and three of five are different situations that a bare answer cannot distinguish. This implementation returns the count alongside the answer and escalates explicitly when the majority is thin or absent.",
+          "code_ref": "self_consistency.py:run"
+        },
+        {
+          "principle_id": 5,
+          "relation": "default_gap",
+          "note": "The reader sees one answer and has no way to know it was contested, or that four other paths reached something else. That is a false impression of certainty, produced by a technique adopted specifically to handle uncertainty. Fix: carry the agreement count through to wherever the answer is displayed, rather than discarding it at the boundary of this function.",
+          "code_ref": "self_consistency.py:run"
+        },
+        {
+          "principle_id": 2,
+          "relation": "default_gap",
+          "note": "N samples means N times the latency, and by default nothing is emitted until all of them land. Fix, applied here: emit each sample as it completes so a five-sample run reads as progress rather than as one very slow call.",
+          "code_ref": "self_consistency.py:run"
+        },
+        {
+          "principle_id": 7,
+          "relation": "depends",
+          "note": "Each path produces its reasoning, so the derivation exists. Whether the dissenting paths are ever shown, which is where the interesting information usually is, is a wrapper decision. The pattern neither surfaces nor hides them.",
+          "code_ref": "self_consistency.py:Attempt"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
+    },
+    {
+      "id": "pattern-multi-agent-supervisor-workers",
+      "slug": "pattern-supervisor-workers",
+      "title": "Supervisor and workers: route subtasks to specialists",
+      "summary": "A supervisor decomposes a request into typed subtasks, assigns each to a named specialist with its own instruction and its own slice of context, and a synthesiser merges the results while preserving disagreement.",
+      "difficulty": "advanced",
+      "libraries": [
+        "openai",
+        "pydantic",
+        "python-dotenv"
+      ],
+      "principle_ids": [
+        2,
+        6,
+        8,
+        9
+      ],
+      "runtime_requirements": [
+        "OPENAI_API_KEY"
+      ],
+      "version": "7543bed03e61",
+      "last_updated": "2026-07-28T15:59:55+01:00",
+      "changelog": [
+        {
+          "version": "7543bed03e61",
+          "committed_at": "2026-07-28T15:59:55+01:00",
+          "summary": "fix(corpus): empty-family state, prior-art ambiguity, principle titles"
+        },
+        {
+          "version": "9ae2b11db34e",
+          "committed_at": "2026-07-27T21:05:19+01:00",
+          "summary": "feat(patterns): Agentic Design Patterns corpus, runnable and doctrine-bound (#726)"
+        }
+      ],
+      "deprecated_at": null,
+      "replacement_example_slug": null,
+      "entry_kind": "pattern",
+      "pattern_family": "multi-agent",
+      "when_to_use": "When subtasks are genuinely independent, or need materially different instructions, and context isolation is the actual win. Not when they merely sound different. A team of agents that did not need to be a team is a larger bill and more places to fail.",
+      "doctrine_relations": [
+        {
+          "principle_id": 9,
+          "relation": "structural",
+          "note": "This is the pattern that makes P9 concrete. The work exists as a typed Plan of Subtasks with named owners, not as a message stream: which specialist was engaged, on what question, and what each returned are all separate addressable objects. A supervisor that passes a growing chat transcript between agents has the shape without the property.",
+          "code_ref": "supervisor_workers.py:Plan"
+        },
+        {
+          "principle_id": 6,
+          "relation": "default_gap",
+          "note": "Every specialist's raw output is surfaced by default, so the operator sees internal chatter rather than the state of the work. At three specialists it is readable; at ten it is noise that hides which lens actually mattered. Fix: report progress as the count of specialists complete plus any disagreement detected, and keep the per-specialist text behind an inspection step.",
+          "code_ref": "supervisor_workers.py:run"
+        },
+        {
+          "principle_id": 2,
+          "relation": "default_gap",
+          "note": "Specialists run one after another with nothing emitted between the plan and the synthesis unless the caller prints it. A multi-specialist run is the longest-latency shape in this corpus and the easiest to mistake for a hang. Fix, applied here: emit which specialist is running, and its question, before each call rather than after.",
+          "code_ref": "supervisor_workers.py:run"
+        },
+        {
+          "principle_id": 8,
+          "relation": "default_gap",
+          "note": "The supervisor's plan executes as soon as it is produced. Nothing pauses between deciding to engage four specialists and spending four model calls doing it. Fix: treat the plan as a proposal with its cost stated, and gate execution on approval when the fan-out or its cost crosses a threshold you set.",
+          "code_ref": "supervisor_workers.py:run"
+        }
+      ],
+      "doctrine_binding_basis": "first-party doctrine analysis (hand-authored, not an architect.validate run)"
     }
   ],
   "application_guides": [
