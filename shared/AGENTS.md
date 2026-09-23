@@ -64,6 +64,7 @@ Full trust contract: https://aidesignblueprint.com/en/for-agents/trust-and-data-
 - Principles: `https://aidesignblueprint.com/principles`
 - Examples: `https://aidesignblueprint.com/examples`
 - Download hub: `https://aidesignblueprint.com/en/for-agents`
+- Plugin (Claude Code, Claude desktop app, Cowork, Gemini CLI, Codex): `https://aidesignblueprint.com/en/for-agents/plugin`
 
 Public retrieval MCP tools:
 
