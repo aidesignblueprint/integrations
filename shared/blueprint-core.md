@@ -39,12 +39,12 @@ Apply this rule to AI features, agents, copilots, and workflow automations.
 
 ## Public retrieval MCP tools
 
-- `principles.list(cluster?)`
+- `principles.list(cluster?, lens?)`
 - `clusters.list()`
-- `principles.get(slug)`
+- `principles.get(slug, lens?)`
 - `clusters.get(slug)`
 - `examples.get(slug)`
-- `principles.search(query, limit?)`
+- `principles.search(query, limit?, lens?)`
 - `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`

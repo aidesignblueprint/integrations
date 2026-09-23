@@ -12,12 +12,12 @@ Gemini CLI supports Agent Skills — install the Gemini Skill Pack for always-on
 
 ## Public read-only MCP tools worth using
 
-- `principles.list(cluster?)`
+- `principles.list(cluster?, lens?)`
 - `clusters.list()`
-- `principles.get(slug)`
+- `principles.get(slug, lens?)`
 - `clusters.get(slug)`
 - `examples.get(slug)`
-- `principles.search(query, limit?)`
+- `principles.search(query, limit?, lens?)`
 - `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
