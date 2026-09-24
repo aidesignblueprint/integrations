@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "aidesignblueprint-mcp"
-version = "1.0.0"
+version = "1.0.1"
 description = "MCP server metadata for AI Design Blueprint: remote endpoint at https://aidesignblueprint.com/mcp"
 readme = "README.md"
 license = { text = "MIT" }
