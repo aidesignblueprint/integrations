@@ -4,7 +4,7 @@
 
 Agentic design patterns are the highest-value entries in the retrieval surface. Each is runnable and carries a doctrine binding saying which principles the shape expresses in code (`structural`), which its textbook form breaks by default along with the fix (`default_gap`), and which your implementation decides (`depends`). Reach for a pattern before a generic example: a flat principle list cannot distinguish code that EXPRESSES a principle from code that VIOLATES it, and those are opposite claims. Retrieve with examples.search(pattern_family=...) or filter results to entry_kind 'pattern'. Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
 
-Generated at: 2026-09-24T09:46:24+01:00. Source commit: f8a77ab69d759b777c9a084033d42609431e7ce5. Content version: f8a77ab69d75.
+Generated at: 2026-09-24T19:15:28+01:00. Source commit: 707230aaf59bac01c74aef5890c7b74206467bbd. Content version: 707230aaf59b.
 
 Enterprise trust & security. AI Design Blueprint is designed for enterprise and proprietary codebases:
 
@@ -52,7 +52,7 @@ Enterprise trust & security. AI Design Blueprint is designed for enterprise and 
 
 ## MCP
 
-- [MCP server](https://aidesignblueprint.com/mcp): JSON-RPC endpoint exposing the 12 public read-only tools plus the authenticated validator trio (architect.validate, design.validate, spec.validate)
+- [MCP server](https://aidesignblueprint.com/mcp): JSON-RPC endpoint exposing the 12 public tools (all read-only except signals.feedback, which records the feedback you send) plus the authenticated validator trio (architect.validate, design.validate, spec.validate)
 
 ## Optional
 
