@@ -3,14 +3,14 @@
   "name": "io.github.aidesignblueprint/doctrine",
   "title": "AI Design Blueprint",
   "description": "Doctrine and validators for governable agentic AI products. 12 public tools, no credentials required.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://aidesignblueprint.com",
   "license": "MIT",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "aidesignblueprint-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": {
         "type": "streamable-http",
         "url": "https://aidesignblueprint.com/mcp"
