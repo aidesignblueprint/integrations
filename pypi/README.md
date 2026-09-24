@@ -1,8 +1,8 @@
-# AI Design Blueprint — MCP Server
+# AI Design Blueprint: MCP Server
 
 <!-- mcp-name: io.github.aidesignblueprint/doctrine -->
 
-The industry standard doctrine for building safe, observable, and steerable AI agent UX.
+AI Design Blueprint is a doctrine and runtime standard for agentic AI: 10 principles, 16 laws, and Pro/Teams validators your coding agent calls over MCP.
 
 **Remote MCP endpoint:** `https://aidesignblueprint.com/mcp`
 
@@ -22,18 +22,19 @@ Add to your MCP client config:
 
 ## What you get
 
-- **10 doctrine principles** across 4 principle clusters
+- **10 doctrine principles** across 4 principle clusters, plus **16 laws** for interfaces and specs
 - **Curated implementation examples** with difficulty, library, and principle filters
 - **Application guides** for security hardening, observable evaluation, and more
-- **Agent asset artifacts** — `.mdc` rules files, `llms.txt`, skill packs
+- **Agent asset artifacts**: `.mdc` rules files, `llms.txt`, skill packs
 
 ## Authentication tiers
 
 | Tier | Tools | Credential |
 |---|---|---|
-| Public | 13 tools | None required |
-| Auth | 6 tools | Firebase Bearer token |
-| Pro/Teams | 2 tools | Paid membership |
+| Public | 12 tools | None required |
+| Signed in | 6 tools | Bearer token, any plan |
+| Pro/Teams | 10 tools | Active Pro or Teams plan |
+| Teams | 1 tool | Teams plan |
 
 ## Links
 
