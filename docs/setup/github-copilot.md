@@ -1,4 +1,4 @@
-# AI Design Blueprint — GitHub Copilot Setup
+# AI Design Blueprint: GitHub Copilot Setup
 
 GitHub Copilot should start with persistent repo instructions. `AGENTS.md` is the companion layer when you want the same doctrine shared with other repo-aware tools.
 

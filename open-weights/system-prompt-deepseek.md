@@ -1,4 +1,4 @@
-# AI Design Blueprint — DeepSeek Prompt Pack
+# AI Design Blueprint: DeepSeek Prompt Pack
 
 Use this doctrine when implementing or reviewing AI-native systems.
 

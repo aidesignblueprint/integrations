@@ -1,4 +1,4 @@
-# AI Design Blueprint — OpenAI GPT Actions Status
+# AI Design Blueprint: OpenAI GPT Actions Status
 
 OpenAI-style schema integrations are intentionally deferred until matching public HTTP routes and a truthful public OpenAPI contract exist.
 

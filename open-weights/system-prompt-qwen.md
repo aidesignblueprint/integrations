@@ -1,4 +1,4 @@
-# AI Design Blueprint — Qwen Prompt Pack
+# AI Design Blueprint: Qwen Prompt Pack
 
 Use this doctrine when implementing or reviewing AI-native systems.
 

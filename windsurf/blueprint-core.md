@@ -1,8 +1,8 @@
-# Agentic Design Blueprint
+# AI Design Blueprint
 
-- Generated at: 2026-09-25T14:30:11+01:00
-- Source commit: 30adf5515649b61d0d2be94d210ff24296da3847
-- Content version: 30adf5515649
+- Generated at: 2026-09-25T18:52:01+01:00
+- Source commit: 211124384d941568d9482e38bfff569a1df3f58d
+- Content version: 211124384d94
 
 ## Summary
 

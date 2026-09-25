@@ -1,12 +1,12 @@
-# AI Design Blueprint — Claude Code Setup
+# AI Design Blueprint: Claude Code Setup
 
 Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill pack for always-on doctrine context.
 
 ## Steps
 
 1. Download `claude-skill-pack.zip` and install it into your Claude skills directory.
-2. Register the MCP server. Two docs-aligned paths per <https://docs.claude.com/en/docs/claude-code/mcp>: (a) **project-scope** — drop the JSON snippet below into `.mcp.json` at your project root, accept the trust prompt on first session; (b) **user-scope** — run `claude mcp add --transport http aidesignblueprint --scope user https://aidesignblueprint.com/mcp` to register the MCP across all your projects via `~/.claude.json`. **Do NOT** place `mcpServers` inside `.claude/settings.json` — Claude Code v2.x does not read that key.
-3. Verify the connection with `claude mcp list` — should show `aidesignblueprint ✓ Connected`. Then call `clusters.list()` after initialize succeeds.
+2. Register the MCP server. Two docs-aligned paths per <https://docs.claude.com/en/docs/claude-code/mcp>: (a) **project-scope**, drop the JSON snippet below into `.mcp.json` at your project root, accept the trust prompt on first session; (b) **user-scope**, run `claude mcp add --transport http aidesignblueprint --scope user https://aidesignblueprint.com/mcp` to register the MCP across all your projects via `~/.claude.json`. **Do NOT** place `mcpServers` inside `.claude/settings.json`: Claude Code v2.x does not read that key.
+3. Verify the connection with `claude mcp list`: should show `aidesignblueprint ✓ Connected`. Then call `clusters.list()` after initialize succeeds.
 4. Keep `agent-kickoff-prompts.md` nearby for first-turn audit and retrieval prompts.
 
 ## Copy block
@@ -46,14 +46,14 @@ Use Claude Code with the public read-only MCP endpoint plus the Blueprint skill 
 
 Show that your agent or repo follows the Blueprint doctrine.
 
-**Free badge** — paste into your `README.md` (no account required):
+**Free badge**: paste into your `README.md` (no account required):
 
 ```markdown
 [![AI Design Blueprint](https://aidesignblueprint.com/api/badge/free.svg)](https://aidesignblueprint.com)
 ```
 
-**Pro badge** — run `architect.validate()` with your architecture description.
-The response includes `run_id`, `badge_url`, and `review_url`. Two embeddable variants are available — replace `<run_id>` with the value returned:
+**Pro badge**: run `architect.validate()` with your architecture description.
+The response includes `run_id`, `badge_url`, and `review_url`. Two embeddable variants are available: replace `<run_id>` with the value returned:
 
 Small flat badge:
 
@@ -61,7 +61,7 @@ Small flat badge:
 [![Blueprint Readiness Score](https://aidesignblueprint.com/api/badge/run/<run_id>.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)
 ```
 
-Score card (Glama-style panel — score, grade, tier, repository):
+Score card (Glama-style panel: score, grade, tier, repository):
 
 ```markdown
 [![Blueprint Readiness Score card](https://aidesignblueprint.com/api/badge/run/<run_id>/card.svg)](https://aidesignblueprint.com/en/readiness-review/<run_id>)

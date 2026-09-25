@@ -1,11 +1,11 @@
-# AI Design Blueprint — Codex Setup
+# AI Design Blueprint: Codex Setup
 
 Codex uses MCP for live doctrine retrieval plus an installable skill pack for always-on local context. Install both for the full experience.
 
 ## Steps
 
-1. Install the Codex skill pack (personal): `curl -L -o /tmp/codex-skill-pack.zip https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip && unzip -o /tmp/codex-skill-pack.zip -d ~` — installs into `~/.agents/skills/agentic-design-blueprint/SKILL.md`.
-2. Or install project-local: `curl -L -o /tmp/codex-skill-pack.zip https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip && unzip -o /tmp/codex-skill-pack.zip -d .` — installs into `.agents/skills/agentic-design-blueprint/SKILL.md`.
+1. Install the Codex skill pack (personal): `curl -L -o /tmp/codex-skill-pack.zip https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip && unzip -o /tmp/codex-skill-pack.zip -d ~`, installs into `~/.agents/skills/agentic-design-blueprint/SKILL.md`.
+2. Or install project-local: `curl -L -o /tmp/codex-skill-pack.zip https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip && unzip -o /tmp/codex-skill-pack.zip -d .`, installs into `.agents/skills/agentic-design-blueprint/SKILL.md`.
 3. Run `codex mcp add aidesignblueprint --url https://aidesignblueprint.com/mcp` in the Codex CLI, or copy the TOML block below into `~/.codex/config.toml`.
 4. Keep `agentic-design-blueprint.json` or `agentic-design-blueprint.md` in the repo as the offline doctrine fallback when MCP is unavailable.
 5. Verify the live connection with `clusters.list()` first, then move into a real doctrine lookup for the current task.

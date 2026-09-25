@@ -1,4 +1,4 @@
-# AI Design Blueprint — GitHub Copilot Instructions
+# AI Design Blueprint: GitHub Copilot Instructions
 
 Use AI Design Blueprint doctrine whenever working on AI-native features, agentic workflows, coding agents, approval flows, or model-driven product behavior.
 
@@ -20,7 +20,7 @@ Use AI Design Blueprint doctrine whenever working on AI-native features, agentic
 
 ## MCP support notes
 
-Copilot coding agent supports MCP **tools** only — resources and prompts are not supported.
+Copilot coding agent supports MCP **tools** only: resources and prompts are not supported.
 Remote MCP servers require OAuth authentication; the Blueprint public endpoint needs no API key, sign-in, or OAuth (every tool call is logged with a keyed one-way digest of the network address, never the address itself).
 Add the Blueprint server under `.github/copilot/mcp.json` (repo-level) or user settings → MCP (personal). Example:
 

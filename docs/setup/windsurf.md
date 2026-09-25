@@ -1,4 +1,4 @@
-# AI Design Blueprint — Windsurf Setup
+# AI Design Blueprint: Windsurf Setup
 
 Windsurf should start from the workspace rule file, with `AGENTS.md` as the cross-tool companion if you want repo-level consistency.
 

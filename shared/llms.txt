@@ -1,10 +1,10 @@
-# Agentic Design Blueprint
+# AI Design Blueprint
 
-> The Agentic Design Blueprint is a doctrine handbook and MCP server for building agentic AI products: principles, agentic design patterns, examples, and a validator trio (architect.validate, design.validate, spec.validate) delivered as machine- and human-readable assets for AI coding agents to fetch and follow.
+> AI Design Blueprint is a doctrine handbook and MCP server for building agentic AI products: principles, agentic design patterns, examples, and a validator trio (architect.validate, design.validate, spec.validate) delivered as machine- and human-readable assets for AI coding agents to fetch and follow.
 
 Agentic design patterns are the highest-value entries in the retrieval surface. Each is runnable and carries a doctrine binding saying which principles the shape expresses in code (`structural`), which its textbook form breaks by default along with the fix (`default_gap`), and which your implementation decides (`depends`). Reach for a pattern before a generic example: a flat principle list cannot distinguish code that EXPRESSES a principle from code that VIOLATES it, and those are opposite claims. Retrieve with examples.search(pattern_family=...) or filter results to entry_kind 'pattern'. Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
 
-Generated at: 2026-09-25T14:30:11+01:00. Source commit: 30adf5515649b61d0d2be94d210ff24296da3847. Content version: 30adf5515649.
+Generated at: 2026-09-25T18:52:01+01:00. Source commit: 211124384d941568d9482e38bfff569a1df3f58d. Content version: 211124384d94.
 
 Enterprise trust & security. AI Design Blueprint is designed for enterprise and proprietary codebases:
 
@@ -15,7 +15,7 @@ Enterprise trust & security. AI Design Blueprint is designed for enterprise and 
 
 ## Primary entrypoints
 
-- [For Agents](https://aidesignblueprint.com/en/for-agents): entry page for AI coding agents — doctrine overview, install ladder, MCP quick-start
+- [For Agents](https://aidesignblueprint.com/en/for-agents): entry page for AI coding agents: doctrine overview, install ladder, MCP quick-start
 - [The 16 laws](https://aidesignblueprint.com/en/principles/laws): the 8 spec-quality and 8 experience-design laws that spec.validate and design.validate score agentic specs and surfaces against
 - [Plugin](https://aidesignblueprint.com/en/for-agents/plugin): one install for Claude Code, the Claude desktop app, Cowork, Gemini CLI, Codex and GitHub Copilot CLI (skills, role agents, remote MCP)
 - [Security & Application](https://aidesignblueprint.com/en/security-application): the enterprise security and application-review surface
@@ -23,11 +23,11 @@ Enterprise trust & security. AI Design Blueprint is designed for enterprise and 
 - [Doctrine corpus (JSON)](https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.json): machine-readable principles, clusters, and examples
 - [Doctrine corpus (Markdown)](https://aidesignblueprint.com/agent-assets/agentic-design-blueprint.md): human-readable principles, clusters, and examples
 - [Cursor rules](https://aidesignblueprint.com/agent-assets/agentic-design-principles.mdc): the doctrine as a `.mdc` Cursor rule file
-- [Claude skill pack](https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip): zip — SKILL.md following the agentskills.io standard
-- [Codex skill pack](https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip): zip — Codex-flavored skill bundle
-- [Gemini skill pack](https://aidesignblueprint.com/agent-assets/gemini-skill-pack.zip): zip — Gemini CLI skill bundle
-- [Qwen skill pack](https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip): zip — Qwen-flavored skill bundle
-- [Cursor rule pack](https://aidesignblueprint.com/agent-assets/cursor-rule-pack.zip): zip — `.cursor/rules` + `.cursor/mcp.json`
+- [Claude skill pack](https://aidesignblueprint.com/agent-assets/claude-skill-pack.zip): zip, SKILL.md following the agentskills.io standard
+- [Codex skill pack](https://aidesignblueprint.com/agent-assets/codex-skill-pack.zip): zip, Codex-flavored skill bundle
+- [Gemini skill pack](https://aidesignblueprint.com/agent-assets/gemini-skill-pack.zip): zip, Gemini CLI skill bundle
+- [Qwen skill pack](https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip): zip, Qwen-flavored skill bundle
+- [Cursor rule pack](https://aidesignblueprint.com/agent-assets/cursor-rule-pack.zip): zip, `.cursor/rules` + `.cursor/mcp.json`
 - [Agent kickoff prompts](https://aidesignblueprint.com/agent-assets/agent-kickoff-prompts.md): ready-to-paste prompts for starting an agent session
 - [Codex config](https://aidesignblueprint.com/agent-assets/codex.config.toml): `codex.config.toml` for the OpenAI Codex CLI
 - [AGENTS.md](https://aidesignblueprint.com/agent-assets/AGENTS.md): the agents.md-standard entrypoint doc

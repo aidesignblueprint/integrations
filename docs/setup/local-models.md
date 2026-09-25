@@ -1,4 +1,4 @@
-# AI Design Blueprint — Local Models Setup
+# AI Design Blueprint: Local Models Setup
 
 For local or open-weight runtimes, start with static prompt packs and only add HTTP MCP if your runtime supports it safely.
 

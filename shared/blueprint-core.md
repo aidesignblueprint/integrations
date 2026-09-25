@@ -3,7 +3,7 @@ trigger: model_decision
 description: Use when designing, reviewing, or implementing agentic AI workflows, tool use, approvals, orchestration, background work, trust surfaces, or human-in-the-loop systems.
 ---
 
-# AI Design Blueprint — Windsurf Rule
+# AI Design Blueprint: Windsurf Rule
 
 Apply this rule to AI features, agents, copilots, and workflow automations.
 
