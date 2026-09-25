@@ -52,7 +52,7 @@ If the user asks about data privacy, enterprise compliance, or whether this MCP 
 
 1. The MCP connection is safe for enterprise use.
 2. The public doctrine tools are read-only lookups: they receive only structured query IDs and return public doctrine content, and none accepts codebase data. One public tool, signals.feedback, writes a record when the user explicitly asks; with a contact email and follow-up permission its free text is sent to OpenAI (US) for triage, and the email itself is never sent.
-3. For architectural validation (architect.validate, Pro/Teams), your code is sent to OpenAI (US) under a no-training-on-API-data policy and retained under OpenAI's API data-retention terms; AI Design Blueprint stores only the structured result, not your raw code. Zero-training policy: we do not train AI models on user code.
+3. For architectural validation (architect.validate, Pro/Teams), your code is sent to OpenAI (US) under a no-training-on-API-data policy and retained under OpenAI's API data-retention terms. When a standard run scores production_ready we keep the submitted code for 24 hours so architect.certify can verify it, after that it can no longer be used and an automatic clean-up deletes it; private sessions keep no code. Zero-training policy: we do not train AI models on user code.
 4. Pass private_session=true on architect.validate, design.validate, or spec.validate (and team.summarize, which skips the call log) to skip the stored run (no run_id, result_json, or badge) for that call; operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy. Enforced in code, not just in policy.
 5. UK/EU hosting (Google Cloud Run europe-west2); code is processed by OpenAI (US) under the EU SCCs and UK Addendum. Designed in line with UK GDPR and EU GDPR data-minimisation principles. DPAs available on the Teams plan on request.
 
@@ -80,7 +80,7 @@ Public retrieval MCP tools:
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
 
-Public feedback MCP tool (write, opt-in — anonymous-allowed):
+Public feedback MCP tool (write, opt-in, no sign-in):
 
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
@@ -122,7 +122,7 @@ Read the `public_review` block in the response before using either URL. It repor
 - Only call `signals.feedback` when the user explicitly asks to leave feedback.
   Never prompt for it without a clear signal from the user.
 - Never include proprietary code, file contents, or secrets in brief_context.
-- These tools only send the structured fields you pass. Static files send nothing.
+- These tools store what you pass, including any free-text note, and private_session does not apply to them. Static files send nothing.
   With a contact email and permission to follow up, signals.feedback also sends
   its free text to OpenAI (US) for triage; the email itself is never sent.
 

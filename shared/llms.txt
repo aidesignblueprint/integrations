@@ -4,14 +4,14 @@
 
 Agentic design patterns are the highest-value entries in the retrieval surface. Each is runnable and carries a doctrine binding saying which principles the shape expresses in code (`structural`), which its textbook form breaks by default along with the fix (`default_gap`), and which your implementation decides (`depends`). Reach for a pattern before a generic example: a flat principle list cannot distinguish code that EXPRESSES a principle from code that VIOLATES it, and those are opposite claims. Retrieve with examples.search(pattern_family=...) or filter results to entry_kind 'pattern'. Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
 
-Generated at: 2026-09-25T12:44:53+01:00. Source commit: 27a49970cfc7565b49e28afe6ea40c8975ec24fa. Content version: 27a49970cfc7.
+Generated at: 2026-09-25T14:30:11+01:00. Source commit: 30adf5515649b61d0d2be94d210ff24296da3847. Content version: 30adf5515649.
 
 Enterprise trust & security. AI Design Blueprint is designed for enterprise and proprietary codebases:
 
 - PUBLIC TOOLS: the doctrine tools are read-only lookups that accept only query strings; none reads your codebase, prompts, or file contents. One public tool, signals.feedback, writes a record, only when the user explicitly asks; with a contact email and follow-up permission its free text is sent to OpenAI (US) for triage, and the email itself is never sent.
 - AUTHENTICATED TOOLS (Pro/Teams): The validators (architect.validate, design.validate, spec.validate) send payloads to OpenAI (US) under a no-training-on-API-data policy, retained under OpenAI's API data-retention terms. Zero-training policy: we do not train models on user code, validation payloads, or architecture diagrams.
 - PRIVATE SESSION: Pass private_session=true to architect.validate, design.validate, or spec.validate to skip the stored run (no run_id, result_json, or badge) for that call; team.summarize accepts it too, skipping the call log. Operational security and cost logs, which never contain your code or artefact, are retained per the Privacy Policy for abuse, availability, and incident investigation. Enforced in code at the MCP server layer, not just in policy.
-- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK/EEA. Both in europe-west2 (London, UK); content sent to the validators (architect.validate / .certify, design.validate, spec.validate) is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request. Full detail on the trust page linked under Optional below.
+- COMPLIANCE: Designed in line with UK GDPR and EU GDPR data-minimisation principles. Compute: Google Cloud Run. Data at rest, the database and its backups: Cloud SQL, kept in the UK. Both in europe-west2 (London, UK); content sent to the validators (architect.validate / .certify, design.validate, spec.validate) is processed by OpenAI (US) under the EU SCCs and UK Addendum. Data Processing Agreements (DPAs) available on the Teams plan on request. Full detail on the trust page linked under Optional below.
 
 ## Primary entrypoints
 

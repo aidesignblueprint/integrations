@@ -51,7 +51,7 @@ Apply this rule to AI features, agents, copilots, and workflow automations.
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
 
-## Public feedback MCP tool (opt-in, anonymous-allowed)
+## Public feedback MCP tool (opt-in, no sign-in)
 
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 

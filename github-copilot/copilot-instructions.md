@@ -21,7 +21,7 @@ Use AI Design Blueprint doctrine whenever working on AI-native features, agentic
 ## MCP support notes
 
 Copilot coding agent supports MCP **tools** only — resources and prompts are not supported.
-Remote MCP servers require OAuth authentication; the Blueprint public endpoint is anonymous read-only and does not require OAuth.
+Remote MCP servers require OAuth authentication; the Blueprint public endpoint needs no API key, sign-in, or OAuth (every tool call is logged with a keyed one-way digest of the network address, never the address itself).
 Add the Blueprint server under `.github/copilot/mcp.json` (repo-level) or user settings → MCP (personal). Example:
 
 ```json
@@ -42,7 +42,7 @@ Add the Blueprint server under `.github/copilot/mcp.json` (repo-level) or user s
 - `guides.get(slug)`
 - `guides.search(query, limit?)`
 
-## Public feedback MCP tool (opt-in, anonymous-allowed)
+## Public feedback MCP tool (opt-in, no sign-in)
 
 - `signals.feedback(task_type?, surface?, rating_clarity?, rating_usefulness?, what_helped?, what_missing?, would_use_again?, contact_email?, permission_to_follow_up?)`
 
