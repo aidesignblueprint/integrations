@@ -4,7 +4,7 @@
 
 Agentic design patterns are the highest-value entries in the retrieval surface. Each is runnable and carries a doctrine binding saying which principles the shape expresses in code (`structural`), which its textbook form breaks by default along with the fix (`default_gap`), and which your implementation decides (`depends`). Reach for a pattern before a generic example: a flat principle list cannot distinguish code that EXPRESSES a principle from code that VIOLATES it, and those are opposite claims. Retrieve with examples.search(pattern_family=...) or filter results to entry_kind 'pattern'. Families: tools-actions, reasoning-reflection, retrieval, memory, sampling-search, multi-agent, safety-routing, specialty.
 
-Generated at: 2026-10-03T16:04:09+01:00. Source commit: f6d45f314165f5f1154a431b433b290c8219670e. Content version: f6d45f314165.
+Generated at: 2026-10-06T20:24:45+01:00. Source commit: 922869d9059e27a9b328a167b2ba4a2fb583f72f. Content version: 922869d9059e.
 
 Enterprise trust & security. AI Design Blueprint is designed for enterprise and proprietary codebases:
 
