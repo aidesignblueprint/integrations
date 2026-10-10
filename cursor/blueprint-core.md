@@ -1,8 +1,8 @@
 # AI Design Blueprint
 
-- Generated at: 2026-10-06T20:24:45+01:00
-- Source commit: 922869d9059e27a9b328a167b2ba4a2fb583f72f
-- Content version: 922869d9059e
+- Generated at: 2026-10-10T13:31:16+01:00
+- Source commit: 41cab29082aa5ce578c1532fa22697f5e975a039
+- Content version: 41cab29082aa
 
 ## Summary
 
