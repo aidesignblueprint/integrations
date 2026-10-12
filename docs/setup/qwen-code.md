@@ -1,10 +1,10 @@
-# AI Design Blueprint — Qwen Code Setup
+# AI Design Blueprint: Qwen Code Setup
 
-Qwen Code supports Agent Skills and MCP — install the Qwen Skill Pack for always-on local doctrine context, then register the MCP server for live retrieval.
+Qwen Code supports Agent Skills and MCP: install the Qwen Skill Pack for always-on local doctrine context, then register the MCP server for live retrieval.
 
 ## Steps
 
-1. Install the Qwen Skill Pack (project-local): `curl -L -o /tmp/qwen-skill-pack.zip https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip && unzip -o /tmp/qwen-skill-pack.zip -d .` — installs `.qwen/skills/agentic-design-blueprint/SKILL.md`.
+1. Install the Qwen Skill Pack (project-local): `curl -L -o /tmp/qwen-skill-pack.zip https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip && unzip -o /tmp/qwen-skill-pack.zip -d .`. It installs `.qwen/skills/agentic-design-blueprint/SKILL.md`.
 2. Or install personally (home directory): `curl -L -o /tmp/qwen-skill-pack.zip https://aidesignblueprint.com/agent-assets/qwen-skill-pack.zip && unzip -o /tmp/qwen-skill-pack.zip -d ~`.
 3. Register the MCP server in Qwen Code settings. Add `https://aidesignblueprint.com/mcp` as an HTTP MCP server named `aidesignblueprint`. No API key required for public read-only tools.
 4. Keep `agentic-design-blueprint.json` or `system-prompt-qwen.md` as a local offline fallback.
@@ -12,12 +12,12 @@ Qwen Code supports Agent Skills and MCP — install the Qwen Skill Pack for alwa
 
 ## Public read-only MCP tools worth using
 
-- `principles.list(cluster?)`
+- `principles.list(cluster?, lens?)`
 - `clusters.list()`
-- `principles.get(slug)`
+- `principles.get(slug, lens?)`
 - `clusters.get(slug)`
 - `examples.get(slug)`
-- `principles.search(query, limit?)`
+- `principles.search(query, limit?, lens?)`
 - `examples.search(query, principle_ids?, difficulty?, library?, pattern_family?, limit?)`
 - `assets.list()`
 - `guides.list()`
